@@ -70,42 +70,23 @@ h1{
   position:fixed;
   inset:0;
   pointer-events:none;
-  z-index:0;          /* 在背景层 */
+  z-index:0;          
 }
 
-.ballon{
+.emoji{
   position:absolute;
-  width:70px;
-  height:70px;
-  transform: rotate(-45deg);
-  animation: floatUp 10s linear infinite;
-  opacity:0.8;
+  font-size:35px;
+  animation: fall linear infinite;
+  opacity:0.9;
 }
 
-.ballon::before,
-.ballon::after{
-  content:"";
-  position:absolute;
-  width:70px;
-  height:70px;
-  background:inherit;
-  border-radius:50%;
-}
-
-.ballon::before{
-  top:-35px;
-  left:0;
-}
-
-.ballon::after{
-  left:35px;
-  top:0;
-}
-
-
-@keyframes floatUp{
-  0%{ transform:translateY(110vh); }
-  100%{ transform:translateY(-15vh); }
+@keyframes fall{
+  0%{
+    transform:translateY(-10vh);
+  }
+  100%{
+    transform:translateY(110vh);
+  }
 }
 
 </style>
@@ -194,18 +175,23 @@ function showSlides(){
 window.onload=function(){
   typeWriter();
   showSlides();
+
+  const emojis = ["🎉","🎈","❤️","✨","🎂","🥳","💖","🌟"];
+
+  for(let j=0;j<25;j++){
+    const e = document.createElement("div");
+    e.className = "emoji";
+    e.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+
+    e.style.left = Math.random()*100 + "%";
+    e.style.animationDuration = (5 + Math.random()*5) + "s";
+    e.style.animationDelay = (-Math.random()*5) + "s";
+
+    document.getElementById("balloons").appendChild(e);
+  }
 };
 
-/* ===== 生成气球 ===== */
-for(let j=0;j<14;j++){
-  const b=document.createElement("div");
-  b.className="ballon";
-  b.style.left=Math.random()*100+"%";
-  b.style.background=`hsl(${Math.random()*360},70%,60%)`;
-  b.style.animationDuration=(6+Math.random()*6)+"s";
-  b.style.animationDelay=(-Math.random()*6)+"s";
-  document.getElementById("balloons").appendChild(b);
-}
+
 </script>
 
 </body>
