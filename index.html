@@ -12,12 +12,12 @@ body{
   font-family: inherit;
 
   background:
-    radial-gradient(white 1px, transparent 1px),
-    radial-gradient(white 1px, transparent 1px),
+    radial-gradient(#fff 1px, transparent 1px),
+    radial-gradient(#fff 1px, transparent 1px),
     linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
 
-  background-size: 3px 3px, 5px 5px, cover;
-  background-position: 0 0, 1px 1px, center;
+  background-size: 3px 3px, 5px 5px, 100% 100%;
+  background-position: 0 0, 1px 1px, 0 0;
 }
 
 /* 背景 emoji 层 */
@@ -60,20 +60,20 @@ body{
 
 h1{
   font-size:35px;
-  margin-top:-50px;   /* 让标题往上 */
+  margin-top:-50px;
   margin-bottom:15px;
   text-align:center;
-  color:white;   /* 加这一行 */
+  color:white;
 }
-
 
 #message{
   white-space:pre-wrap;
   line-height:1.9;
   font-size:25px;
-  margin-top:35px;   /* 加这个 */
-  color:white;   /* 加这一行 */
+  margin-top:35px;
+  color:white;
 }
+</style>
 
 .mediaArea{
   width:120%;
@@ -94,10 +94,10 @@ h1{
   height:auto;
   display:block;
 }
-<head>
-<style>
+</style>
+</head>
 
-body{
+<body>
 
 <div id="balloons"></div>
 
@@ -106,7 +106,6 @@ body{
 </audio>
 
 <div class="page">
-
   <div class="textArea">
     <h1>🎉 生日快乐 🎉</h1>
     <div id="message"></div>
