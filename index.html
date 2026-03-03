@@ -8,9 +8,9 @@
 <style>
 :root{
   --bg: #f7dce6;
-  --textMax: 560px;
+  --textMax: 600px;
   --mediaMax: 520px;
-  --mediaHeight: 60vh;   /* ✅ 调高到60vh */
+  --mediaHeight: 75vh;   /* ✅ 媒体往上抬高 */
 }
 
 body{
@@ -26,7 +26,7 @@ body{
   flex-direction:column;
 }
 
-/* 上面文字区域 */
+/* 上方文字区域 */
 .textArea{
   flex:1;
   display:flex;
@@ -43,22 +43,23 @@ body{
 }
 
 h1{
-  margin:8px 0 12px;
-  font-size:18px;
+  margin:10px 0 14px;
+  font-size:22px;   /* ✅ 标题放大 */
 }
 
 #message{
   white-space:pre-wrap;
-  line-height:1.85;
-  font-size:18px;
+  line-height:1.9;
+  font-size:17px;   /* ✅ 文字放大 */
 }
 
-/* 下面媒体区域 */
+/* 底部媒体区域 */
 .mediaArea{
   height:var(--mediaHeight);
   display:flex;
   justify-content:center;
-  align-items:center;
+  align-items:flex-start; /* 关键：往上贴 */
+  padding-top:10px;
 }
 
 .mediaBox{
@@ -81,7 +82,7 @@ h1{
   border-radius:0;
 }
 
-/* 气球背景 */
+/* 气球 */
 #balloons{
   position:fixed;
   inset:0;
@@ -109,7 +110,6 @@ h1{
 
 <div class="page">
 
-  <!-- 文字区 -->
   <div class="textArea">
     <div class="textBox">
       <h1>🎉 生日快乐 🎉</h1>
@@ -117,7 +117,6 @@ h1{
     </div>
   </div>
 
-  <!-- 媒体区 -->
   <div class="mediaArea">
     <div class="mediaBox">
 
@@ -194,15 +193,6 @@ window.onload=function(){
   typeWriter();
   showSlides();
 };
-
-for(let j=0;j<14;j++){
-  const b=document.createElement("div");
-  b.className="ballon";
-  b.style.left=Math.random()*100+"%";
-  b.style.background=`hsl(${Math.random()*360},70%,60%)`;
-  b.style.animationDuration=(5+Math.random()*4)+"s";
-  document.getElementById("balloons").appendChild(b);
-}
 </script>
 
 </body>
