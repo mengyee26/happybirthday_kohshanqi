@@ -6,66 +6,58 @@
 <title>生日快乐🎉</title>
 <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
 <style>
-  body {
-    font-family: 'Ma Shan Zheng', cursive;
-    font-size: 20px;
-    line-height: 1.6;
-    margin: 0;
-    padding: 15px;
-    background: linear-gradient(to top, #fffbe6, #ffe0f0);
-    overflow-x: hidden;
-    color: #333;
-    text-align: center;
-    position: relative;
-  }
-
-  #carousel {
-    position: relative;
-    width: 100%;
-    height: 56vw; /* 手机16:9自适应 */
-    margin: 15px 0;
-    overflow: hidden;
-    border-radius: 10px;
-    background: #000;
-    z-index: 1;
-  }
-
-  #carousel img, #carousel video {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: none;
-  }
-
-  #carousel video { background: #000; }
-
-  /* 气球动画 */
-  .balloon {
-    position: absolute;
-    width: 40px;
-    height: 55px;
-    border-radius: 50%;
-    opacity: 0.7;
-    animation: float 6s linear infinite;
-    z-index: 0;
-  }
-
-  .balloon:nth-child(1) { background: #ff7f7f; left: 5%; animation-duration: 7s; }
-  .balloon:nth-child(2) { background: #ffb347; left: 25%; animation-duration: 8s; }
-  .balloon:nth-child(3) { background: #7fbfff; left: 45%; animation-duration: 6s; }
-  .balloon:nth-child(4) { background: #ff77ff; left: 65%; animation-duration: 7.5s; }
-  .balloon:nth-child(5) { background: #90ee90; left: 85%; animation-duration: 6.5s; }
-
-  @keyframes float {
-    0% { transform: translateY(100vh) rotate(0deg); }
-    100% { transform: translateY(-200px) rotate(360deg); }
-  }
-
-  h1 { margin-top: 20px; font-size: 24px; }
-  #message { margin-bottom: 15px; position: relative; z-index: 1; white-space: pre-wrap; text-align: left; }
+body {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 20px;
+  line-height: 1.6;
+  margin: 0;
+  padding: 15px;
+  background: linear-gradient(to top, #fffbe6, #ffe0f0);
+  overflow-x: hidden;
+  color: #333;
+  text-align: center;
+  position: relative;
+}
+#carousel {
+  position: relative;
+  width: 100%;
+  height: 56vw;
+  margin: 15px 0;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #000;
+  z-index: 1;
+}
+#carousel img, #carousel video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: absolute;
+  top:0;
+  left:0;
+  display: none;
+}
+#carousel video { background: #000; }
+.balloon {
+  position: absolute;
+  width: 40px;
+  height: 55px;
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: float 6s linear infinite;
+  z-index: 0;
+}
+.balloon:nth-child(1) { background: #ff7f7f; left: 5%; animation-duration: 7s; }
+.balloon:nth-child(2) { background: #ffb347; left: 25%; animation-duration: 8s; }
+.balloon:nth-child(3) { background: #7fbfff; left: 45%; animation-duration: 6s; }
+.balloon:nth-child(4) { background: #ff77ff; left: 65%; animation-duration: 7.5s; }
+.balloon:nth-child(5) { background: #90ee90; left: 85%; animation-duration: 6.5s; }
+@keyframes float {
+  0% { transform: translateY(100vh) rotate(0deg); }
+  100% { transform: translateY(-200px) rotate(360deg); }
+}
+h1 { margin-top: 20px; font-size: 24px; }
+#message { margin-bottom: 15px; position: relative; z-index: 1; white-space: pre-wrap; text-align: left; }
 </style>
 </head>
 <body>
@@ -84,6 +76,7 @@
 
 <!-- 图片/视频轮播 -->
 <div id="carousel">
+  <!-- 按顺序交替：照片 → 视频 -->
   <img src="IMG_20260303_133642.jpg">
   <video src="VID_20260302_213138_460.mp4" muted></video>
   <img src="IMG_20260303_133710.jpg">
@@ -108,7 +101,7 @@
 <audio id="bgm" src="birthday_song.mp3" autoplay muted loop></audio>
 
 <script>
-// 轮播逻辑
+// 轮播交替显示照片→视频
 const carousel = document.getElementById('carousel');
 const items = carousel.querySelectorAll('img, video');
 let index = 0;
@@ -121,12 +114,11 @@ function showItem(i) {
     }
   });
 }
-
 showItem(index);
 setInterval(() => {
   index = (index + 1) % items.length;
   showItem(index);
-}, 10000); // 10秒切换
+}, 10000);
 
 // 打字机效果
 const message = `谢谢你每一次都在我身边，陪我疯过，哭过，笑过。不知道是不是我太久没回来了，上一轮我回来，我们聊了很多，我好像很久没有那样笑过了。我知道你的良苦用心，谢谢你。
@@ -138,10 +130,9 @@ const message = `谢谢你每一次都在我身边，陪我疯过，哭过，笑
 let i = 0;
 function typeWriter() {
   if (i < message.length) {
-    messageDiv = document.getElementById('message');
-    messageDiv.innerHTML += message.charAt(i);
+    document.getElementById('message').innerHTML += message.charAt(i);
     i++;
-    setTimeout(typeWriter, 60); // 每字符 60ms
+    setTimeout(typeWriter, 60);
   }
 }
 typeWriter();
