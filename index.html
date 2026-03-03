@@ -16,33 +16,33 @@
     overflow-x: hidden;
     color: #333;
     text-align: center;
+    position: relative;
   }
 
   #carousel {
     position: relative;
     width: 100%;
-    max-width: 100%; /* 手机全屏 */
-    height: 56vw; /* 保持16:9比例，高度自适应屏幕宽度 */
+    height: 56vw; /* 手机16:9自适应 */
     margin: 15px 0;
     overflow: hidden;
     border-radius: 10px;
     background: #000;
+    z-index: 1;
   }
 
   #carousel img, #carousel video {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* 完整显示，不裁剪 */
+    object-fit: contain;
     position: absolute;
     top: 0;
     left: 0;
     display: none;
   }
 
-  #carousel video {
-    background: #000;
-  }
+  #carousel video { background: #000; }
 
+  /* 气球动画 */
   .balloon {
     position: absolute;
     width: 40px;
@@ -50,7 +50,7 @@
     border-radius: 50%;
     opacity: 0.7;
     animation: float 6s linear infinite;
-    z-index: 0; /* 背景 */
+    z-index: 0;
   }
 
   .balloon:nth-child(1) { background: #ff7f7f; left: 5%; animation-duration: 7s; }
@@ -65,8 +65,7 @@
   }
 
   h1 { margin-top: 20px; font-size: 24px; }
-  p { margin-bottom: 15px; position: relative; z-index: 1; }
-
+  #message { margin-bottom: 15px; position: relative; z-index: 1; white-space: pre-wrap; text-align: left; }
 </style>
 </head>
 <body>
@@ -80,11 +79,8 @@
 
 <h1>生日快乐，我的债主😂</h1>
 
-<p>谢谢你每一次都在我身边，陪我疯过，哭过，笑过。不知道是不是我太久没回来了，上一轮我回来，我们聊了很多，我好像很久没有那样笑过了。我知道你的良苦用心，谢谢你。</p>
-
-<p>我想你应该好奇我怎么会做网站吧？其实，功劳要谢谢你，是你开始教会我很多，我不会做图你教我CANVA,我不会的你都在教我都在学。现在想想，好像好多因为你我才会😂。</p>
-
-<p>不多说啦～很多话在心中🤣🤣，你我明白就好。</p>
+<!-- 打字机文字 -->
+<div id="message"></div>
 
 <!-- 图片/视频轮播 -->
 <div id="carousel">
@@ -109,9 +105,10 @@
 </div>
 
 <!-- 音乐 -->
-<audio id="bgm" src="birthday_song.mp3" autoplay loop></audio>
+<audio id="bgm" src="birthday_song.mp3" autoplay muted loop></audio>
 
 <script>
+// 轮播逻辑
 const carousel = document.getElementById('carousel');
 const items = carousel.querySelectorAll('img, video');
 let index = 0;
@@ -126,11 +123,37 @@ function showItem(i) {
 }
 
 showItem(index);
-
 setInterval(() => {
   index = (index + 1) % items.length;
   showItem(index);
-}, 10000); // 每10秒切换
+}, 10000); // 10秒切换
+
+// 打字机效果
+const message = `谢谢你每一次都在我身边，陪我疯过，哭过，笑过。不知道是不是我太久没回来了，上一轮我回来，我们聊了很多，我好像很久没有那样笑过了。我知道你的良苦用心，谢谢你。
+
+我想你应该好奇我怎么会做网站吧？其实，功劳要谢谢你，是你开始教会我很多，我不会做图你教我CANVA,我不会的你都在教我都在学。现在想想，好像好多因为你我才会😂。
+
+不多说啦～很多话在心中🤣🤣，你我明白就好。`;
+
+let i = 0;
+function typeWriter() {
+  if (i < message.length) {
+    messageDiv = document.getElementById('message');
+    messageDiv.innerHTML += message.charAt(i);
+    i++;
+    setTimeout(typeWriter, 60); // 每字符 60ms
+  }
+}
+typeWriter();
+
+// 点击解除静音播放生日歌
+document.body.addEventListener('click', () => {
+  const bgm = document.getElementById('bgm');
+  if(bgm.muted){
+    bgm.muted = false;
+    bgm.play();
+  }
+});
 </script>
 
 </body>
