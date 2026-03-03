@@ -13,31 +13,13 @@ body {
     overflow-x:hidden;
 }
 h1 { margin-top:30px; font-size:36px; color:#d63384;}
-button {
-    padding:10px 20px;
-    font-size:18px;
-    cursor:pointer;
-    margin-top:20px;
-    border-radius:8px;
-    border:none;
-    background:#d63384;
-    color:white;
-}
 #message { font-size:20px; line-height:1.6; white-space:pre-wrap; margin:30px auto; max-width:600px; text-align:left;}
 /* 轮播样式 */
 .carousel { position:relative; max-width:80%; margin:40px auto; }
 .carousel-item { display:none; }
 .carousel-item img, .carousel-item video { width:100%; border-radius:10px; }
-.prev, .next {
-    cursor:pointer; position:absolute; top:50%; width:auto; padding:16px; color:white;
-    font-weight:bold; font-size:24px; border-radius:0 3px 3px 0; user-select:none;
-    background:rgba(0,0,0,0.3);
-}
-.next { right:0; border-radius:3px 0 0 3px; }
-.prev:hover, .next:hover { background:rgba(0,0,0,0.6); }
-
-/* 烟花气球简单动画 */
-#balloons { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:-1;}
+/* 烟花气球 */
+#balloons { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0;}
 .ballon { position:absolute; width:50px; height:70px; border-radius:50%; animation:floatUp 5s infinite; }
 @keyframes floatUp { 0% {transform:translateY(100vh);} 100% {transform:translateY(-10vh);} }
 </style>
@@ -45,13 +27,12 @@ button {
 <body>
 
 <h1>🎉 生日快乐 🎉</h1>
-<button onclick="typeWriter()">点击显示祝福 💌</button>
 <p id="message"></p>
 
-<!-- 音乐自动播放 -->
-<audio src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/birthday_song.mp3" autoplay loop></audio>
+<!-- 音乐 -->
+<audio id="birthdayMusic" src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/birthday_song.mp3" autoplay loop></audio>
 
-<div class="carousel">
+<div class="carousel" id="carousel">
   <!-- 照片 & 视频交替 -->
   <div class="carousel-item"><img src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/IMG_20260303_133642.jpg"></div>
   <div class="carousel-item"><video src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/VID_20260302_213138_460.mp4" controls></video></div>
@@ -72,16 +53,12 @@ button {
   <div class="carousel-item"><img src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/IMG_20260303_134604_905.jpg"></div>
   <div class="carousel-item"><video src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/VID_20260302_214452_656.mp4" controls></video></div>
   <div class="carousel-item"><video src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/VID_20260302_214553_513.mp4" controls></video></div>
-
-  <!-- 上一张/下一张按钮 -->
-  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-  <a class="next" onclick="plusSlides(1)">&#10095;</a>
 </div>
 
 <div id="balloons"></div>
 
 <script>
-// 打字机效果祝福词
+// 打字机祝福
 const text = `生日快乐，我的债主😂
 
 谢谢你每一次都在我身边，陪我疯过，哭过，笑过。不知道是不是我太久没回来了，上一轮我回来，我们聊了很多，我好像很久没有那样笑过了。我知道你的良苦用心，谢谢你。
@@ -99,7 +76,7 @@ function typeWriter() {
         if (i < text.length) {
             msg.innerHTML += text.charAt(i);
             i++;
-            setTimeout(typing, 50);
+            setTimeout(typing, 80); // 每80ms打一个字
         }
     }
     typing();
@@ -108,7 +85,6 @@ function typeWriter() {
 // 轮播功能
 let slideIndex = 0;
 const slides = document.getElementsByClassName("carousel-item");
-
 function showSlides(n) {
     if (n >= slides.length) slideIndex = 0;
     if (n < 0) slideIndex = slides.length - 1;
@@ -116,21 +92,16 @@ function showSlides(n) {
     slides[slideIndex].style.display="block";
 }
 
-// 手动按钮
-function plusSlides(n) {
-    clearInterval(autoSlide); // 点击按钮重置自动轮播
-    showSlides(slideIndex += n);
-    autoSlide = setInterval(nextSlide, 4000);
-}
-
-// 自动轮播
-function nextSlide() {
-    slideIndex++;
+// 自动开始网页
+window.onload = function() {
+    // 播放音乐
+    document.getElementById("birthdayMusic").play().catch(()=>{});
+    // 开始打字机
+    typeWriter();
+    // 自动轮播，每10秒切换
     showSlides(slideIndex);
+    setInterval(function(){ slideIndex++; showSlides(slideIndex); }, 10000);
 }
-
-showSlides(slideIndex);
-let autoSlide = setInterval(nextSlide, 4000);
 
 // 烟花气球动画
 for(let j=0;j<20;j++){
