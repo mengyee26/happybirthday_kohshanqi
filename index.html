@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>生日快乐🎉</title>
-<!-- 引入 Ma Shan Zheng 字体 -->
 <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
 <style>
   body {
@@ -18,25 +17,29 @@
     text-align: center;
   }
 
-  p {
-    margin-bottom: 20px;
+  #carousel {
+    position: relative;
+    width: 80%;
+    max-width: 800px;
+    height: 450px;
+    margin: 20px auto;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #000;
   }
 
-  button {
-    font-family: 'Ma Shan Zheng', cursive;
-    font-size: 22px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 15px;
-    background-color: #ffb6c1;
-    color: white;
-    cursor: pointer;
-    margin-bottom: 30px;
-    transition: transform 0.2s;
+  #carousel img, #carousel video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top:0;
+    left:0;
+    display: none;
   }
 
-  button:hover {
-    transform: scale(1.1);
+  #carousel video {
+    background: #000;
   }
 
   /* 气球动画 */
@@ -44,21 +47,26 @@
     position: absolute;
     width: 50px;
     height: 70px;
-    border-radius: 50% 50% 50% 50%;
-    opacity: 0.8;
+    border-radius: 50%;
+    opacity: 0.7;
     animation: float 6s linear infinite;
+    z-index: 0; /* 背景层 */
   }
 
-  .balloon:nth-child(1) { background: #ff7f7f; left: 10%; animation-duration: 7s; }
-  .balloon:nth-child(2) { background: #ffb347; left: 30%; animation-duration: 8s; }
-  .balloon:nth-child(3) { background: #7fbfff; left: 50%; animation-duration: 6s; }
-  .balloon:nth-child(4) { background: #ff77ff; left: 70%; animation-duration: 7.5s; }
-  .balloon:nth-child(5) { background: #90ee90; left: 90%; animation-duration: 6.5s; }
+  .balloon:nth-child(1) { background: #ff7f7f; left: 5%; animation-duration: 7s; }
+  .balloon:nth-child(2) { background: #ffb347; left: 25%; animation-duration: 8s; }
+  .balloon:nth-child(3) { background: #7fbfff; left: 45%; animation-duration: 6s; }
+  .balloon:nth-child(4) { background: #ff77ff; left: 65%; animation-duration: 7.5s; }
+  .balloon:nth-child(5) { background: #90ee90; left: 85%; animation-duration: 6.5s; }
 
   @keyframes float {
     0% { transform: translateY(100vh) rotate(0deg); }
     100% { transform: translateY(-200px) rotate(360deg); }
   }
+
+  h1 { margin-top: 40px; }
+  p { margin-bottom: 20px; z-index: 1; position: relative; }
+
 </style>
 </head>
 <body>
@@ -74,13 +82,57 @@
 
 <p>谢谢你每一次都在我身边，陪我疯过，哭过，笑过。不知道是不是我太久没回来了，上一轮我回来，我们聊了很多，我好像很久没有那样笑过了。我知道你的良苦用心，谢谢你。</p>
 
-<p>我想你应该好奇我怎么会做网站吧？其实，功劳要谢谢你，是你开始教会我很多，我不会做图你教我 CANVA, 我不会的你都在教我都在学。现在想想，好像好多因为你我才会😂。</p>
+<p>我想你应该好奇我怎么会做网站吧？其实，功劳要谢谢你，是你开始教会我很多，我不会做图你教我CANVA,我不会的你都在教我都在学。现在想想，好像好多因为你我才会😂。</p>
 
 <p>不多说啦～很多话在心中🤣🤣，你我明白就好。</p>
 
-<!-- 播放按钮 -->
-<button onclick="document.getElementById('bgm').play()">点我播放生日歌🎵</button>
-<audio id="bgm" src="birthday_song.mp3"></audio>
+<!-- 图片/视频轮播 -->
+<div id="carousel">
+  <!-- 图片 -->
+  <img src="IMG_20260303_133642.jpg">
+  <video src="VID_20260302_213138_460.mp4" muted></video>
+  <img src="IMG_20260303_133710.jpg">
+  <video src="VID_20260302_213245_548.mp4" muted></video>
+  <img src="IMG_20260303_134045.jpg">
+  <video src="VID_20260302_213457_098.mp4" muted></video>
+  <img src="IMG_20260303_134100.jpg">
+  <video src="VID_20260302_213521_414.mp4" muted></video>
+  <img src="IMG_20260303_134202.jpg">
+  <video src="VID_20260302_214251_375.mp4" muted></video>
+  <img src="IMG_20260303_134223.jpg">
+  <video src="VID_20260302_214320_930.mp4" muted></video>
+  <img src="IMG_20260303_134533.jpg">
+  <video src="VID_20260302_214340_532.mp4" muted></video>
+  <img src="Screenshot_20260303_132729.jpg">
+  <video src="VID_20260302_214409_337.mp4" muted></video>
+  <img src="IMG_20260303_134604_905.jpg">
+  <video src="VID_20260302_214452_656.mp4" muted></video>
+</div>
+
+<!-- 音乐 -->
+<audio id="bgm" src="birthday_song.mp3" autoplay loop></audio>
+
+<script>
+const carousel = document.getElementById('carousel');
+const items = carousel.querySelectorAll('img, video');
+let index = 0;
+
+function showItem(i) {
+  items.forEach((el, idx) => {
+    el.style.display = (idx === i) ? 'block' : 'none';
+    if(el.tagName === 'VIDEO'){
+      if(idx === i){ el.play(); } else { el.pause(); el.currentTime = 0; }
+    }
+  });
+}
+
+showItem(index);
+
+setInterval(() => {
+  index = (index + 1) % items.length;
+  showItem(index);
+}, 10000); // 10秒切换
+</script>
 
 </body>
 </html>
