@@ -8,16 +8,9 @@
 <style>
 body{
   margin:0;
-  overflow-x:hidden;
+  background:#f7dce6;
   font-family: inherit;
-
-  background:
-    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.8) 1px, transparent 2px),
-    radial-gradient(circle at 70% 80%, rgba(255,255,255,0.6) 1px, transparent 2px),
-    radial-gradient(circle at 40% 60%, rgba(255,255,255,0.7) 1px, transparent 2px),
-    linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
-
-  background-size: 600px 600px, 800px 800px, 1000px 1000px, 100% 100%;
+  overflow-x:hidden;
 }
 
 /* 背景 emoji 层 */
@@ -63,7 +56,6 @@ h1{
   margin-top:-50px;
   margin-bottom:15px;
   text-align:center;
-  color:white;
 }
 
 #message{
@@ -71,15 +63,14 @@ h1{
   line-height:1.9;
   font-size:25px;
   margin-top:35px;
-  color:white;
 }
-</style>
 
+/* 媒体固定在底部 */
 .mediaArea{
   width:120%;
   max-width:650px;
-  position:absolute;      /* 关键 */
-  bottom:90px;           /* 离底部高度，可自己调 */
+  position:absolute;
+  bottom:90px;
   left:50%;
   transform:translateX(-50%);
 }
@@ -106,6 +97,7 @@ h1{
 </audio>
 
 <div class="page">
+
   <div class="textArea">
     <h1>🎉 生日快乐 🎉</h1>
     <div id="message"></div>
@@ -146,7 +138,6 @@ h1{
 
 <script>
 (function(){
-  
 
 const text = `生日快乐，我的债主😂
 
