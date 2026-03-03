@@ -1,113 +1,115 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>生日惊喜</title>
 
 <style>
-  :root{
-    --bg: #f7dce6;
-    --textMax: 560px;     /* 文字区域最大宽度（让页面不大） */
-    --mediaMax: 520px;    /* 媒体最大宽度（你可以调小/大） */
-    --mediaHeight: 52vh;  /* 底部媒体区高度（不想太大就调小） */
-  }
+:root{
+  --bg: #f7dce6;
+  --textMax: 560px;
+  --mediaMax: 520px;
+  --mediaHeight: 60vh;   /* ✅ 调高到60vh */
+}
 
-  body{
-    margin:0;
-    background: var(--bg);
-    font-family: inherit; /* 不改你的字体 */
-    overflow:hidden;      /* 关键：不让整页滚，只有文字区滚 */
-  }
+body{
+  margin:0;
+  background: var(--bg);
+  overflow:hidden;
+  font-family: inherit;
+}
 
-  /* 整个页面上下分区：上面文字，下面媒体固定 */
-  .page{
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-  }
+.page{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+}
 
-  /* 上半部文字区：可滚动 + 全部居中 */
-  .textArea{
-    flex: 1;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding: 12px 14px;
-    overflow:auto;               /* 文字多就只滚这里 */
-  }
+/* 上面文字区域 */
+.textArea{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:12px 16px;
+  overflow:auto;
+}
 
-  .textBox{
-    width:100%;
-    max-width: var(--textMax);
-    text-align:center;           /* ✅ 全部居中 */
-  }
+.textBox{
+  width:100%;
+  max-width:var(--textMax);
+  text-align:center;
+}
 
-  h1{
-    margin: 6px 0 10px;
-    font-size: 18px;             /* 网页看起来不会那么大 */
-  }
+h1{
+  margin:8px 0 12px;
+  font-size:18px;
+}
 
-  #message{
-    white-space:pre-wrap;
-    line-height:1.85;
-    font-size: 18px;             /* 文字大小（你要更小我再调） */
-  }
+#message{
+  white-space:pre-wrap;
+  line-height:1.85;
+  font-size:18px;
+}
 
-  /* 下半部媒体区：固定在最下面，不受文字影响 */
-  .mediaArea{
-    height: var(--mediaHeight);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding: 10px 0 18px;
-  }
+/* 下面媒体区域 */
+.mediaArea{
+  height:var(--mediaHeight);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
 
-  .mediaBox{
-    width: 92vw;
-    max-width: var(--mediaMax);
-  }
+.mediaBox{
+  width:92vw;
+  max-width:var(--mediaMax);
+}
 
-  .carousel-item{ display:none; }
+.carousel-item{
+  display:none;
+}
 
-  .carousel-item img,
-  .carousel-item video{
-    display:block;
-    width:100%;
-    height:auto;
-    margin:0 auto;
-    border:none !important;
-    background:none !important;
-    box-shadow:none !important;
-    border-radius:0 !important;
-  }
+.carousel-item img,
+.carousel-item video{
+  display:block;
+  width:100%;
+  height:auto;
+  border:none;
+  background:none;
+  box-shadow:none;
+  border-radius:0;
+}
 
-  /* 气球在背景最底层，不挡 */
-  #balloons{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:-999;
-  }
-  .ballon{
-    position:absolute;
-    width:34px;
-    height:52px;
-    border-radius:50%;
-    animation:floatUp 6s linear infinite;
-    opacity:0.7;
-  }
-  @keyframes floatUp{
-    0%{ transform:translateY(110vh); }
-    100%{ transform:translateY(-15vh); }
-  }
+/* 气球背景 */
+#balloons{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-999;
+}
+
+.ballon{
+  position:absolute;
+  width:34px;
+  height:52px;
+  border-radius:50%;
+  animation:floatUp 6s linear infinite;
+  opacity:0.7;
+}
+
+@keyframes floatUp{
+  0%{ transform:translateY(110vh); }
+  100%{ transform:translateY(-15vh); }
+}
 </style>
 </head>
 
 <body>
+
 <div class="page">
 
-  <!-- 上面文字：居中 + 只滚这里 -->
+  <!-- 文字区 -->
   <div class="textArea">
     <div class="textBox">
       <h1>🎉 生日快乐 🎉</h1>
@@ -115,37 +117,39 @@
     </div>
   </div>
 
-  <!-- 下面媒体：永远固定底部 -->
+  <!-- 媒体区 -->
   <div class="mediaArea">
     <div class="mediaBox">
-      <div class="carousel-item"><img src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/IMG_20260303_133642.jpg"></div>
-      <div class="carousel-item"><video src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/VID_20260302_213138_460.mp4" controls playsinline></video></div>
 
-      <div class="carousel-item"><img src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/IMG_20260303_133710.jpg"></div>
-      <div class="carousel-item"><video src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/VID_20260302_213245_548.mp4" controls playsinline></video></div>
+      <div class="carousel-item"><img src="IMG_20260303_133642.jpg"></div>
+      <div class="carousel-item"><video src="VID_20260302_213138_460.mp4" controls></video></div>
 
-      <div class="carousel-item"><img src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/IMG_20260303_134045.jpg"></div>
-      <div class="carousel-item"><video src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/VID_20260302_213457_098.mp4" controls playsinline></video></div>
+      <div class="carousel-item"><img src="IMG_20260303_133710.jpg"></div>
+      <div class="carousel-item"><video src="VID_20260302_213245_548.mp4" controls></video></div>
 
-      <div class="carousel-item"><img src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/IMG_20260303_134100.jpg"></div>
-      <div class="carousel-item"><video src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/VID_20260302_213521_414.mp4" controls playsinline></video></div>
+      <div class="carousel-item"><img src="IMG_20260303_134045.jpg"></div>
+      <div class="carousel-item"><video src="VID_20260302_213457_098.mp4" controls></video></div>
 
-      <div class="carousel-item"><img src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/IMG_20260303_134202.jpg"></div>
-      <div class="carousel-item"><video src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/VID_20260302_214251_375.mp4" controls playsinline></video></div>
+      <div class="carousel-item"><img src="IMG_20260303_134100.jpg"></div>
+      <div class="carousel-item"><video src="VID_20260302_213521_414.mp4" controls></video></div>
 
-      <div class="carousel-item"><img src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/IMG_20260303_134223.jpg"></div>
-      <div class="carousel-item"><video src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/VID_20260302_214320_930.mp4" controls playsinline></video></div>
+      <div class="carousel-item"><img src="IMG_20260303_134202.jpg"></div>
+      <div class="carousel-item"><video src="VID_20260302_214251_375.mp4" controls></video></div>
 
-      <div class="carousel-item"><img src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/IMG_20260303_134533.jpg"></div>
-      <div class="carousel-item"><video src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/VID_20260302_214340_532.mp4" controls playsinline></video></div>
+      <div class="carousel-item"><img src="IMG_20260303_134223.jpg"></div>
+      <div class="carousel-item"><video src="VID_20260302_214320_930.mp4" controls></video></div>
 
-      <div class="carousel-item"><img src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/Screenshot_20260303_132729.jpg"></div>
-      <div class="carousel-item"><video src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/VID_20260302_214409_337.mp4" controls playsinline></video></div>
+      <div class="carousel-item"><img src="IMG_20260303_134533.jpg"></div>
+      <div class="carousel-item"><video src="VID_20260302_214340_532.mp4" controls></video></div>
 
-      <div class="carousel-item"><img src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/IMG_20260303_134604_905.jpg"></div>
-      <div class="carousel-item"><video src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/VID_20260302_214452_656.mp4" controls playsinline></video></div>
+      <div class="carousel-item"><img src="Screenshot_20260303_132729.jpg"></div>
+      <div class="carousel-item"><video src="VID_20260302_214409_337.mp4" controls></video></div>
 
-      <div class="carousel-item"><video src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/VID_20260302_214553_513.mp4" controls playsinline></video></div>
+      <div class="carousel-item"><img src="IMG_20260303_134604_905.jpg"></div>
+      <div class="carousel-item"><video src="VID_20260302_214452_656.mp4" controls></video></div>
+
+      <div class="carousel-item"><video src="VID_20260302_214553_513.mp4" controls></video></div>
+
     </div>
   </div>
 
@@ -154,8 +158,7 @@
 <div id="balloons"></div>
 
 <script>
-  // 打字机 60
-  const text = `生日快乐，我的债主😂
+const text = `生日快乐，我的债主😂
 
 谢谢你每一次都在我身边，陪我疯过，哭过，笑过。不知道是不是我太久没回来了，上一轮我回来，我们聊了很多，我好像很久没有那样笑过了。我知道你的良苦用心，谢谢你。
 
@@ -163,44 +166,44 @@
 
 不多说啦～很多话在心中🤣🤣，你我明白就好。`;
 
-  let i = 0;
-  function typeWriter(){
-    const el = document.getElementById("message");
-    function typing(){
-      if(i < text.length){
-        el.innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typing, 60);
-      }
+let i=0;
+function typeWriter(){
+  const el=document.getElementById("message");
+  function typing(){
+    if(i<text.length){
+      el.innerHTML+=text.charAt(i);
+      i++;
+      setTimeout(typing,60);
     }
-    typing();
   }
+  typing();
+}
 
-  // 自动轮播 10 秒（媒体固定底部）
-  let slideIndex = 0;
-  const slides = document.getElementsByClassName("carousel-item");
-  function showSlides(){
-    for(const s of slides) s.style.display = "none";
-    slideIndex++;
-    if(slideIndex > slides.length) slideIndex = 1;
-    slides[slideIndex - 1].style.display = "block";
-    setTimeout(showSlides, 10000);
-  }
+let slideIndex=0;
+const slides=document.getElementsByClassName("carousel-item");
 
-  window.onload = function(){
-    typeWriter();
-    showSlides();
-  };
+function showSlides(){
+  for(const s of slides){ s.style.display="none"; }
+  slideIndex++;
+  if(slideIndex>slides.length){ slideIndex=1; }
+  slides[slideIndex-1].style.display="block";
+  setTimeout(showSlides,10000);
+}
 
-  // 背景气球
-  for(let j=0;j<14;j++){
-    const b=document.createElement("div");
-    b.className="ballon";
-    b.style.left=Math.random()*100+"%";
-    b.style.background=`hsl(${Math.random()*360},70%,60%)`;
-    b.style.animationDuration=(5+Math.random()*4)+"s";
-    document.getElementById("balloons").appendChild(b);
-  };
+window.onload=function(){
+  typeWriter();
+  showSlides();
+};
+
+for(let j=0;j<14;j++){
+  const b=document.createElement("div");
+  b.className="ballon";
+  b.style.left=Math.random()*100+"%";
+  b.style.background=`hsl(${Math.random()*360},70%,60%)`;
+  b.style.animationDuration=(5+Math.random()*4)+"s";
+  document.getElementById("balloons").appendChild(b);
+}
 </script>
+
 </body>
 </html>
