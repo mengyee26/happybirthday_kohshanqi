@@ -176,9 +176,14 @@ window.onload=function(){
   typeWriter();
   showSlides();
 
-  const emojis = ["🎉","🎈","❤️","✨","🎂","🥳","💖","🌟"];
+  const emojis = [
+  "✨","🌟","💫","⭐","🎇","🎆",
+  "🎉","🎈","🥳","🎂","💖","❤️",
+  "🌸","🎊","🪄","🌙","💝","💐",
+  "🩷","💛","💙","💜"
+];
 
-  for(let j=0;j<25;j++){
+  for(let j=0;j<60;j++){
     const e = document.createElement("div");
     e.className = "emoji";
     e.innerText = emojis[Math.floor(Math.random()*emojis.length)];
