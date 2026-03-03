@@ -1,117 +1,86 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>生日惊喜</title>
+<title>生日快乐🎉</title>
+<!-- 引入 Ma Shan Zheng 字体 -->
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
 <style>
-body {
-    margin:0;
-    padding:0;
-    font-family: 'Courier New', monospace;
-    background: linear-gradient(to bottom, #ffeef8, #fff0f0);
-    text-align:center;
-    overflow-x:hidden;
-}
-h1 { margin-top:30px; font-size:36px; color:#d63384;}
-#message { font-size:20px; line-height:1.6; white-space:pre-wrap; margin:30px auto; max-width:600px; text-align:left;}
-/* 轮播样式 */
-.carousel { position:relative; max-width:80%; margin:40px auto; }
-.carousel-item { display:none; }
-.carousel-item img, .carousel-item video { width:100%; border-radius:10px; }
-/* 烟花气球 */
-#balloons { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0;}
-.ballon { position:absolute; width:50px; height:70px; border-radius:50%; animation:floatUp 5s infinite; }
-@keyframes floatUp { 0% {transform:translateY(100vh);} 100% {transform:translateY(-10vh);} }
+  body {
+    font-family: 'Ma Shan Zheng', cursive;
+    font-size: 24px;
+    line-height: 1.8;
+    margin: 0;
+    padding: 30px;
+    background: linear-gradient(to top, #fffbe6, #ffe0f0);
+    overflow: hidden;
+    color: #333;
+    text-align: center;
+  }
+
+  p {
+    margin-bottom: 20px;
+  }
+
+  button {
+    font-family: 'Ma Shan Zheng', cursive;
+    font-size: 22px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 15px;
+    background-color: #ffb6c1;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 30px;
+    transition: transform 0.2s;
+  }
+
+  button:hover {
+    transform: scale(1.1);
+  }
+
+  /* 气球动画 */
+  .balloon {
+    position: absolute;
+    width: 50px;
+    height: 70px;
+    border-radius: 50% 50% 50% 50%;
+    opacity: 0.8;
+    animation: float 6s linear infinite;
+  }
+
+  .balloon:nth-child(1) { background: #ff7f7f; left: 10%; animation-duration: 7s; }
+  .balloon:nth-child(2) { background: #ffb347; left: 30%; animation-duration: 8s; }
+  .balloon:nth-child(3) { background: #7fbfff; left: 50%; animation-duration: 6s; }
+  .balloon:nth-child(4) { background: #ff77ff; left: 70%; animation-duration: 7.5s; }
+  .balloon:nth-child(5) { background: #90ee90; left: 90%; animation-duration: 6.5s; }
+
+  @keyframes float {
+    0% { transform: translateY(100vh) rotate(0deg); }
+    100% { transform: translateY(-200px) rotate(360deg); }
+  }
 </style>
 </head>
 <body>
 
-<h1>🎉 生日快乐 🎉</h1>
-<p id="message"></p>
+<!-- 气球 -->
+<div class="balloon"></div>
+<div class="balloon"></div>
+<div class="balloon"></div>
+<div class="balloon"></div>
+<div class="balloon"></div>
 
-<!-- 音乐 -->
-<audio id="birthdayMusic" src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/birthday_song.mp3" autoplay loop></audio>
+<h1>生日快乐，我的债主😂</h1>
 
-<div class="carousel" id="carousel">
-  <!-- 照片 & 视频交替 -->
-  <div class="carousel-item"><img src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/IMG_20260303_133642.jpg"></div>
-  <div class="carousel-item"><video src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/VID_20260302_213138_460.mp4" controls></video></div>
-  <div class="carousel-item"><img src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/IMG_20260303_133710.jpg"></div>
-  <div class="carousel-item"><video src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/VID_20260302_213245_548.mp4" controls></video></div>
-  <div class="carousel-item"><img src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/IMG_20260303_134045.jpg"></div>
-  <div class="carousel-item"><video src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/VID_20260302_213457_098.mp4" controls></video></div>
-  <div class="carousel-item"><img src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/IMG_20260303_134100.jpg"></div>
-  <div class="carousel-item"><video src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/VID_20260302_213521_414.mp4" controls></video></div>
-  <div class="carousel-item"><img src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/IMG_20260303_134202.jpg"></div>
-  <div class="carousel-item"><video src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/VID_20260302_214251_375.mp4" controls></video></div>
-  <div class="carousel-item"><img src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/IMG_20260303_134223.jpg"></div>
-  <div class="carousel-item"><video src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/VID_20260302_214320_930.mp4" controls></video></div>
-  <div class="carousel-item"><img src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/IMG_20260303_134533.jpg"></div>
-  <div class="carousel-item"><video src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/VID_20260302_214340_532.mp4" controls></video></div>
-  <div class="carousel-item"><img src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/Screenshot_20260303_132729.jpg"></div>
-  <div class="carousel-item"><video src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/VID_20260302_214409_337.mp4" controls></video></div>
-  <div class="carousel-item"><img src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/IMG_20260303_134604_905.jpg"></div>
-  <div class="carousel-item"><video src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/VID_20260302_214452_656.mp4" controls></video></div>
-  <div class="carousel-item"><video src="https://raw.githubusercontent.com/mengyee26/happybirthday_kohshanqi/main/VID_20260302_214553_513.mp4" controls></video></div>
-</div>
+<p>谢谢你每一次都在我身边，陪我疯过，哭过，笑过。不知道是不是我太久没回来了，上一轮我回来，我们聊了很多，我好像很久没有那样笑过了。我知道你的良苦用心，谢谢你。</p>
 
-<div id="balloons"></div>
+<p>我想你应该好奇我怎么会做网站吧？其实，功劳要谢谢你，是你开始教会我很多，我不会做图你教我 CANVA, 我不会的你都在教我都在学。现在想想，好像好多因为你我才会😂。</p>
 
-<script>
-// 打字机祝福
-const text = `生日快乐，我的债主😂
+<p>不多说啦～很多话在心中🤣🤣，你我明白就好。</p>
 
-谢谢你每一次都在我身边，陪我疯过，哭过，笑过。不知道是不是我太久没回来了，上一轮我回来，我们聊了很多，我好像很久没有那样笑过了。我知道你的良苦用心，谢谢你。
+<!-- 播放按钮 -->
+<button onclick="document.getElementById('bgm').play()">点我播放生日歌🎵</button>
+<audio id="bgm" src="birthday_song.mp3"></audio>
 
-我想你应该好奇我怎么会做网站吧？其实，功劳要谢谢你，是你开始教会我很多，我不会做图你教我CANVA,我不会的你都在教我都在学。现在想想，好像好多因为你我才会😂。
-
-不多说啦～很多话在心中🤣🤣，你我明白就好。`;
-
-let i = 0;
-function typeWriter() {
-    const msg = document.getElementById("message");
-    msg.innerHTML = "";
-    i = 0;
-    function typing() {
-        if (i < text.length) {
-            msg.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(typing, 80); // 每80ms打一个字
-        }
-    }
-    typing();
-}
-
-// 轮播功能
-let slideIndex = 0;
-const slides = document.getElementsByClassName("carousel-item");
-function showSlides(n) {
-    if (n >= slides.length) slideIndex = 0;
-    if (n < 0) slideIndex = slides.length - 1;
-    for (let i=0;i<slides.length;i++){ slides[i].style.display="none"; }
-    slides[slideIndex].style.display="block";
-}
-
-// 自动开始网页
-window.onload = function() {
-    // 播放音乐
-    document.getElementById("birthdayMusic").play().catch(()=>{});
-    // 开始打字机
-    typeWriter();
-    // 自动轮播，每10秒切换
-    showSlides(slideIndex);
-    setInterval(function(){ slideIndex++; showSlides(slideIndex); }, 10000);
-}
-
-// 烟花气球动画
-for(let j=0;j<20;j++){
-    const b=document.createElement("div");
-    b.className="ballon";
-    b.style.left=Math.random()*100+"%";
-    b.style.background=`hsl(${Math.random()*360},70%,60%)`;
-    b.style.animationDuration=(3+Math.random()*5)+"s";
-    document.getElementById("balloons").appendChild(b);
-}
-</script>
 </body>
 </html>
