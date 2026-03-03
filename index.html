@@ -93,9 +93,10 @@ h1{
 </head>
 
 <body>
-  <audio controls autoplay loop>
-    <source src="生日快乐.mp3" type="audio/mpeg">
-  </audio>
+  
+<audio id="bgm" loop>
+  <source src="生日快乐.mp3" type="audio/mpeg">
+</audio>
 
   <div id="balloons"></div>
   <div class="page">
@@ -180,7 +181,13 @@ function showSlides(){
 window.onload=function(){
   typeWriter();
   showSlides();
+};
 
+window.addEventListener("click", function(){
+  const music = document.getElementById("bgm");
+  music.play();
+}, { once:true });
+  
   const emojis = [
   "✨","🌟","💫","⭐",
   "🎉","🎈","🥳","🎂",
@@ -206,5 +213,6 @@ window.onload=function(){
 
 </script>
 
+    
 </body>
 </html>
