@@ -75,11 +75,31 @@ h1{
 
 .ballon{
   position:absolute;
-  width:90px;
-  height:150px;
+  width:70px;
+  height:70px;
+  transform: rotate(-45deg);
+  animation: floatUp 10s linear infinite;
+  opacity:0.8;
+}
+
+.ballon::before,
+.ballon::after{
+  content:"";
+  position:absolute;
+  width:70px;
+  height:70px;
+  background:inherit;
   border-radius:50%;
-  opacity:0.6;
-  animation: floatUp 8s linear infinite;
+}
+
+.ballon::before{
+  top:-35px;
+  left:0;
+}
+
+.ballon::after{
+  left:35px;
+  top:0;
 }
 
 
