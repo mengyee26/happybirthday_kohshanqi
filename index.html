@@ -1,119 +1,129 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>生日快乐</title>
 
 <style>
+  body{
+    margin:0;
+    font-family:"Noto Sans SC",sans-serif;
+    background:linear-gradient(to bottom,#f6d9e1,#f4cfd9);
+    height:100vh;            /* 关键：锁定整屏 */
+    overflow:hidden;         /* 关键：外层不滚动 */
+    color:#111;
+  }
 
-body{
-background:linear-gradient(to bottom,#f6d9e1,#f4cfd9);
-margin:0;
-font-family:"Noto Sans SC",sans-serif;
-overflow-x:hidden;
-min-height:100vh;
-}
+  /* emoji 层 */
+  #balloons{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:0;
+  }
+  .emoji{
+    position:absolute;
+    font-size:28px;
+    animation:fall linear forwards;
+  }
+  @keyframes fall{
+    0%{ transform:translateY(-12vh); }
+    100%{ transform:translateY(112vh); }
+  }
 
-/* emoji背景 */
+  /* 页面整体：一屏内布局 */
+  .page{
+    position:relative;
+    z-index:1;
+    height:100vh;            /* 关键：整屏 */
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
 
-#balloons{
-position:fixed;
-inset:0;
-pointer-events:none;
-overflow:hidden;
-z-index:0;
-}
+  /* 顶部区 */
+  h1{
+    margin:10px 0 0;
+    font-size:30px;
+    text-align:center;       /* 标题保持居中 */
+  }
 
-.emoji{
-position:absolute;
-font-size:30px;
-animation:fall linear infinite;
-}
+  .subtitle{
+    width:90%;
+    max-width:420px;
+    margin:20px auto 30px auto;  /* 标题下空一行 + 副标题下空一行 */
+    text-align:left;             /* 副标题往左靠 */
+    font-size:22px;              /* 你要变大就改这里 */
+    font-weight:700;
+  }
 
-@keyframes fall{
+  /* 内容区：可滚动，不会推着底部媒体跑 */
+  .content{
+    width:90%;
+    max-width:420px;
+    flex:1;
+    overflow:auto;            /* 关键：文字在这里滚动 */
+    padding-bottom:14px;
+  }
 
-0%{
-transform:translateY(-10vh);
-}
+  .textArea{
+    text-align:left;
+    line-height:1.8;
+    font-size:22px;
+    white-space:pre-line;     /* 保留换行 */
+  }
 
-100%{
-transform:translateY(110vh);
-}
+  /* 底部媒体：固定在屏幕底部（但不是 position:fixed，不卡） */
+  .mediaBox{
+    width:90%;
+    max-width:420px;
+    border-radius:12px;
+    overflow:hidden;
+    margin: 10px 0 16px;
+    background: rgba(255,255,255,0.35);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  }
+  .mediaBox img,
+  .mediaBox video{
+    width:100%;
+    height:auto;
+    display:block;
+    object-fit:contain;
+    background:#0000;
+  }
+  .mediaBox video{ background:#000; }
+</style>
+</head>
 
-}
+<body>
+  <div id="balloons"></div>
 
-/* 页面 */
+  <!-- 音乐 -->
+  <audio id="bgm" loop>
+    <source src="生日快乐.mp3" type="audio/mpeg">
+  </audio>
 
-.page{
-display:flex;
-flex-direction:column;
-align-items:center;
-position:relative;
-z-index:1;
-padding-bottom:260px;
-}
+  <div class="page">
+    <h1>🎉 生日快乐 🎉</h1>
 
-/* 标题 */
+    <div class="subtitle">生日快乐，我的债主😂</div>
 
-h1{
-font-size:30px;
-margin-top:10px;
-margin-bottom:5px;
-text-align:center;
-}
+    <!-- 文字滚动区（不会推底部媒体） -->
+    <div class="content">
+      <div class="textArea" id="message"></div>
+    </div>
 
-/* 副标题 */
-
-.subtitle{
-width:90%;
-max-width:420px;
-margin:20px auto 30px auto;
-text-align:left;
-font-size:24px;
-}
-
-/* 文字 */
-
-.textArea{
-width:90%;
-max-width:420px;
-margin:0 auto 20px auto;
-text-align:left;
-line-height:1.8;
-font-size:22px;
-white-space: pre-line;
-}
-
-/* 视频图片 */
-
-.mediaBox{
-width:90%;
-max-width:420px;
-border-radius:12px;
-overflow:hidden;
-margin-top:20px;
-}
-
-<!-- emoji容器 -->
-<div id="balloons"></div>
-
-<!-- 音乐 -->
-<audio id="bgm" loop>
-<source src="生日快乐.mp3" type="audio/mpeg">
-</audio>
-
-<div class="page">
-
-<h1>🎉 生日快乐 🎉</h1>
-
-<div class="subtitle">生日快乐，我的债主😂</div>
-
-<div class="textArea" id="message"></div>
+    <!-- 底部媒体固定区 -->
+    <div class="mediaBox">
+      <img id="photo" style="display:none;">
+      <video id="video" controls playsinline preload="metadata" style="display:none;"></video>
+    </div>
+  </div>
 
 <script>
-/* 打字机文字（60速度） */
+/* ===== 打字机 ===== */
 const text = `谢谢你每一次都在我身边，陪我疯过，哭过，笑过。
 不知道是不是我太久没回来了，上一次我回来，我们聊了很多。
 我好像很久没有那样笑过了，我知道你的良苦用心，谢谢你💖
@@ -128,31 +138,15 @@ let ti = 0;
 function typeWriter(){
   const box = document.getElementById("message");
   if(!box) return;
-
   if(ti < text.length){
     box.textContent += text.charAt(ti);
     ti++;
-    setTimeout(typeWriter, 100);  // 速度 100
+    setTimeout(typeWriter, 100);
   }
 }
 typeWriter();
 
-/* ✅ 下面继续放你原本的：轮播/音乐/emoji 的代码 */
-</script>
-
-<div class="mediaBox">
-
-<img id="photo" style="display:none;">
-<video id="video" controls style="display:none;"></video>
-
-</div>
-
-</div>
-
-<script>
-
-/* 照片 */
-
+/* ===== 照片/视频轮播（10秒切换，视频不自动播放） ===== */
 const photos=[
 "IMG_20260303_133642.jpg",
 "IMG_20260303_133710.jpg",
@@ -163,9 +157,7 @@ const photos=[
 "IMG_20260303_134533.jpg",
 "Screenshot_20260303_132729.jpg",
 "IMG_20260303_134604_905.jpg"
-]
-
-/* 视频 */
+];
 
 const videos=[
 "VID_20260302_213138_460.mp4",
@@ -178,90 +170,62 @@ const videos=[
 "VID_20260302_214409_337.mp4",
 "VID_20260302_214452_656.mp4",
 "VID_20260302_214553_513.mp4"
-]
+];
 
-const photo=document.getElementById("photo")
-const video=document.getElementById("video")
+const photo=document.getElementById("photo");
+const video=document.getElementById("video");
 
-let index=0
-let showPhoto=true
+let idx=0;
+let showPhoto=true;
 
 function changeMedia(){
+  try{ video.pause(); }catch(e){}
 
-if(showPhoto){
-
-video.pause()
-video.style.display="none"
-
-photo.src=photos[index%photos.length]
-photo.style.display="block"
-
-}else{
-
-photo.style.display="none"
-
-video.src=videos[index%videos.length]
-video.style.display="block"
-
-index++
-
+  if(showPhoto){
+    video.style.display="none";
+    photo.style.display="block";
+    photo.src = photos[idx % photos.length];
+  }else{
+    photo.style.display="none";
+    video.style.display="block";
+    video.src = videos[idx % videos.length];
+    video.load();            // 不自动 play
+    idx++;
+  }
+  showPhoto = !showPhoto;
 }
+changeMedia();
+setInterval(changeMedia, 10000);
 
-showPhoto=!showPhoto
+/* ===== 点哪里都播放/暂停音乐（点到视频不抢） ===== */
+const music = document.getElementById("bgm");
+window.addEventListener("click", (e)=>{
+  if(e.target && (e.target.tagName==="VIDEO" || e.target.closest("video"))) return;
+  if(!music) return;
+  if(music.paused) music.play().catch(()=>{});
+  else music.pause();
+});
 
-}
-
-changeMedia()
-
-setInterval(changeMedia,10000)
-
-/* 点击播放暂停音乐 */
-
-const music=document.getElementById("bgm")
-
-window.addEventListener("click",function(){
-
-if(music.paused){
-
-music.play().catch(()=>{})
-
-}else{
-
-music.pause()
-
-}
-
-})
-
-/* emoji */
-
+/* ===== emoji：不卡版本（数量少 + 自动清理） ===== */
 function spawnEmojis(){
+  const container = document.getElementById("balloons");
+  const emojis=["🎉","🎂","💎","💰","✨","💖","🌸","🎈","🥳","💝","🎊"];
 
-const container=document.getElementById("balloons")
+  for(let i=0;i<14;i++){                 // ✅ 少一点更流畅
+    const e=document.createElement("div");
+    e.className="emoji";
+    e.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+    e.style.left=Math.random()*100+"%";
 
-const emojis=["🎉","🎂","💎","💰","✨","💖","🌸","🎈","🥳","💝","🎊","🪄","🎀","💌","💵"]
+    const dur = 6 + Math.random()*6;     // ✅ 掉落速度（这里调）
+    e.style.animationDuration = dur + "s";
 
-for(let i=0;i<15;i++)
-
-const e=document.createElement("div")
-
-e.className="emoji"
-
-e.innerText=emojis[Math.floor(Math.random()*emojis.length)]
-
-e.style.left=Math.random()*100+"%"
-
-e.style.animationDuration=3+Math.random()*4+"s"
-
-container.appendChild(e)
-
-setTimeout(()=>{e.remove()},12000)
+    container.appendChild(e);
+    setTimeout(()=>e.remove(), (dur*1000)+300); // ✅ 自动删除，不会越堆越卡
+  }
 }
-
-spawnEmojis()
-
-setInterval(spawnEmojis,6000)
-
+spawnEmojis();
+setInterval(spawnEmojis, 2500);          // ✅ 频率也别太高
 </script>
 
 </body>
