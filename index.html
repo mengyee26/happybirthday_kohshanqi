@@ -9,86 +9,65 @@
 <style>
 
 body{
-  background: linear-gradient(to bottom,#f6d9e1,#f4cfd9);
-  margin:0;
-  font-family:"Noto Sans SC",sans-serif;
-  overflow-x:hidden;
-  min-height:100vh;
-}
-
-/* emoji背景 */
-
-#balloons{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:0;
-  overflow:hidden;
-}
-
-.emoji{
-  position:absolute;
-  font-size:26px;
-  animation:fall linear infinite;
-}
-
-@keyframes fall{
-  0%{transform:translateY(-15vh);}
-  100%{transform:translateY(115vh);}
+background:linear-gradient(to bottom,#f6d9e1,#f4cfd9);
+margin:0;
+font-family:"Noto Sans SC",sans-serif;
+overflow-x:hidden;
+min-height:100vh;
 }
 
 /* 页面 */
 
 .page{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  position:relative;
-  z-index:1;
+display:flex;
+flex-direction:column;
+align-items:center;
+position:relative;
+z-index:1;
 }
 
 /* 标题 */
 
 h1{
-  font-size:30px;
-  margin-top:10px;
-  margin-bottom:5px;
-  text-align:center;
+font-size:30px;
+margin-top:10px;
+margin-bottom:5px;
+text-align:center;
 }
 
 /* 副标题 */
 
 .subtitle{
-  font-size:18px;
-  margin-bottom:20px;
-  text-align:center;
+font-size:18px;
+margin-bottom:20px;
+text-align:center;
 }
 
 /* 文字区域 */
 
 .textArea{
-  width:90%;
-  max-width:420px;
-  margin:0 auto 20px auto;
-  text-align:left;
-  line-height:1.8;
-  font-size:17px;
+width:90%;
+max-width:420px;
+margin:0 auto 20px auto;
+text-align:left;
+line-height:1.8;
+font-size:17px;
 }
 
-/* 图片视频 */
+/* 媒体框 */
 
-.carousel{
-  width:90%;
-  max-width:420px;
-  margin-bottom:50px;
+.mediaBox{
+width:90%;
+max-width:420px;
+border-radius:12px;
+overflow:hidden;
 }
 
-.carousel img,
-.carousel video{
-  width:100%;
-  height:auto;
-  display:block;
-  margin-bottom:18px;
+.mediaBox img,
+.mediaBox video{
+width:100%;
+height:auto;
+display:block;
 }
 
 </style>
@@ -96,8 +75,6 @@ h1{
 </head>
 
 <body>
-
-<div id="balloons"></div>
 
 <div class="page">
 
@@ -119,65 +96,10 @@ h1{
 
 </div>
 
-<div class="carousel">
+<div class="mediaBox">
 
-<img src="IMG_20260303_133642.jpg">
-
-<video controls>
-<source src="VID_20260302_213138_460.mp4" type="video/mp4">
-</video>
-
-<img src="IMG_20260303_133710.jpg">
-
-<video controls>
-<source src="VID_20260302_213245_548.mp4" type="video/mp4">
-</video>
-
-<img src="IMG_20260303_134045.jpg">
-
-<video controls>
-<source src="VID_20260302_213457_098.mp4" type="video/mp4">
-</video>
-
-<img src="IMG_20260303_134100.jpg">
-
-<video controls>
-<source src="VID_20260302_213521_414.mp4" type="video/mp4">
-</video>
-
-<img src="IMG_20260303_134202.jpg">
-
-<video controls>
-<source src="VID_20260302_214251_375.mp4" type="video/mp4">
-</video>
-
-<img src="IMG_20260303_134223.jpg">
-
-<video controls>
-<source src="VID_20260302_214320_930.mp4" type="video/mp4">
-</video>
-
-<img src="IMG_20260303_134533.jpg">
-
-<video controls>
-<source src="VID_20260302_214340_532.mp4" type="video/mp4">
-</video>
-
-<img src="Screenshot_20260303_132729.jpg">
-
-<video controls>
-<source src="VID_20260302_214409_337.mp4" type="video/mp4">
-</video>
-
-<img src="IMG_20260303_134604_905.jpg">
-
-<video controls>
-<source src="VID_20260302_214452_656.mp4" type="video/mp4">
-</video>
-
-<video controls>
-<source src="VID_20260302_214553_513.mp4" type="video/mp4">
-</video>
+<img id="photo" style="display:none;">
+<video id="video" controls style="display:none;"></video>
 
 </div>
 
@@ -185,33 +107,70 @@ h1{
 
 <script>
 
-/* emoji掉落 */
+/* 照片 */
 
-const emojis=["🎉","🎂","💖","✨","🎈","🌸","💰","💎"]
+const photos=[
+"IMG_20260303_133642.jpg",
+"IMG_20260303_133710.jpg",
+"IMG_20260303_134045.jpg",
+"IMG_20260303_134100.jpg",
+"IMG_20260303_134202.jpg",
+"IMG_20260303_134223.jpg",
+"IMG_20260303_134533.jpg",
+"Screenshot_20260303_132729.jpg",
+"IMG_20260303_134604_905.jpg"
+]
 
-function spawn(){
+/* 视频 */
 
-const container=document.getElementById("balloons")
+const videos=[
+"VID_20260302_213138_460.mp4",
+"VID_20260302_213245_548.mp4",
+"VID_20260302_213457_098.mp4",
+"VID_20260302_213521_414.mp4",
+"VID_20260302_214251_375.mp4",
+"VID_20260302_214320_930.mp4",
+"VID_20260302_214340_532.mp4",
+"VID_20260302_214409_337.mp4",
+"VID_20260302_214452_656.mp4",
+"VID_20260302_214553_513.mp4"
+]
 
-for(let i=0;i<25;i++){
+const photo=document.getElementById("photo")
+const video=document.getElementById("video")
 
-const e=document.createElement("div")
+let index=0
+let showPhoto=true
 
-e.className="emoji"
+function playMedia(){
 
-e.innerText=emojis[Math.floor(Math.random()*emojis.length)]
+if(showPhoto){
 
-e.style.left=Math.random()*100+"%"
+video.pause()
+video.style.display="none"
 
-e.style.animationDuration=5+Math.random()*10+"s"
+photo.src=photos[index%photos.length]
+photo.style.display="block"
 
-container.appendChild(e)
+}else{
+
+photo.style.display="none"
+
+video.src=videos[index%videos.length]
+video.style.display="block"
+video.play()
+
+index++
 
 }
 
+showPhoto=!showPhoto
+
 }
 
-spawn()
+playMedia()
+
+setInterval(playMedia,10000)
 
 </script>
 
