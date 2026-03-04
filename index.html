@@ -1,161 +1,275 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>生日快乐</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>生日快乐</title>
+  <style>
+    body{
+      background:linear-gradient(to bottom,#f6d9e1,#f4cfd9);
+      margin:0;
+      font-family:"Noto Sans SC",sans-serif;
+      overflow-x:hidden;
+      min-height:100vh;
+      color:#111;
+    }
 
-<style>
+    /* emoji 爆炸掉落层 */
+    #balloons{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      z-index:0;
+    }
 
-body{
-background:linear-gradient(to bottom,#f6d9e1,#f4cfd9);
-margin:0;
-font-family:"Noto Sans SC",sans-serif;
-overflow-x:hidden;
-min-height:100vh;
-}
+    .emoji{
+      position:absolute;
+      font-size:30px;
+      animation:fall linear forwards;
+      will-change:transform,opacity;
+    }
 
-.page{
-display:flex;
-flex-direction:column;
-align-items:center;
-}
+    @keyframes fall{
+      0%{
+        transform:translateY(-25vh) scale(0.6) rotate(-10deg);
+        opacity:0;
+        filter:drop-shadow(0 6px 10px rgba(0,0,0,0.08));
+      }
+      10%{ opacity:1; }
+      100%{
+        transform:translateY(115vh) scale(1.25) rotate(12deg);
+        opacity:0;
+      }
+    }
 
-h1{
-font-size:30px;
-margin-top:10px;
-margin-bottom:5px;
-text-align:center;
-}
+    /* 内容层 */
+    .page{
+      position:relative;
+      z-index:1;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      padding: 8px 0 40px;
+    }
 
-.subtitle{
-font-size:18px;
-margin-bottom:20px;
-text-align:center;
-}
+    h1{
+      font-size:30px;
+      margin-top:10px;
+      margin-bottom:5px;
+      text-align:center;
+    }
 
-.textArea{
-width:90%;
-max-width:420px;
-margin:0 auto 20px auto;
-text-align:left;
-line-height:1.8;
-font-size:17px;
-}
+    .subtitle{
+      font-size:18px;
+      margin-bottom:20px;
+      text-align:center;
+    }
 
-.mediaBox{
-width:90%;
-max-width:420px;
-border-radius:12px;
-overflow:hidden;
-}
+    /* 文字：整体居中，但内容左对齐（你要的“居中往左靠”） */
+    .textArea{
+      width:90%;
+      max-width:420px;
+      margin:0 auto 20px auto;
+      text-align:left;
+      line-height:1.8;
+      font-size:17px;
+      white-space:pre-wrap;
+    }
 
-.mediaBox img,
-.mediaBox video{
-width:100%;
-height:auto;
-display:block;
-}
+    /* 只显示一个媒体框：不会把网页变长 */
+    .mediaBox{
+      width:90%;
+      max-width:420px;
+      border-radius:12px;
+      overflow:hidden;
+      background: rgba(255,255,255,0.35);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    }
 
-</style>
+    .mediaBox img,
+    .mediaBox video{
+      width:100%;
+      height:auto;
+      display:block;
+      object-fit:contain; /* 原装比例不裁切 */
+      background:#0000;
+    }
 
+    .mediaBox video{
+      background:#000;
+    }
+
+    .hint{
+      width:90%;
+      max-width:420px;
+      margin-top:10px;
+      font-size:12px;
+      opacity:0.7;
+      text-align:center;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="page">
+  <!-- 背景 emoji -->
+  <div id="balloons"></div>
 
-<h1>🎉 生日快乐 🎉</h1>
+  <!-- 背景音乐：点哪里都能播放/暂停 -->
+  <audio id="bgm" loop>
+    <source src="生日快乐.mp3" type="audio/mpeg" />
+  </audio>
 
-<div class="subtitle">生日快乐，我的债主😂</div>
+  <div class="page">
+    <h1>🎉 生日快乐 🎉</h1>
+    <div class="subtitle">生日快乐，我的债主😂</div>
 
-<div class="textArea">
+    <div class="textArea">
+谢谢你每一次都在我身边，陪我疯过，哭过，笑过。
+不知道是不是我太久没回来了，上一次我回来，我们聊了很多。
+我好像很久没有那样笑过了，我知道你的良苦用心，谢谢你💖
 
-谢谢你每一次都在我身边，陪我疯过，哭过，笑过。  
-不知道是不是我太久没回来了，上一次我回来，我们聊了很多。  
-我好像很久没有那样笑过了，我知道你的良苦用心，谢谢你💖  
-
-我想你应该好奇我怎么会做网站吧？其实，功劳要谢谢你，  
-是你开始教会我很多，我不会做图你教我CANVA，  
-我不会的你都在教我都在学。现在想想，好像好多因为你我才会😂。  
+我想你应该好奇我怎么会做网站吧？其实，功劳要谢谢你，
+是你开始教会我很多，我不会做图你教我CANVA，
+我不会的你都在教我都在学。现在想想，好像好多因为你我才会😂。
 
 不多说啦～很多话在心中🤣🤣，你我明白就好。
+    </div>
 
-</div>
+    <!-- 轮播：只显示一张（照片/视频） -->
+    <div class="mediaBox">
+      <img id="photo" alt="photo" style="display:none;">
+      <video id="video" controls playsinline preload="metadata" style="display:none;"></video>
+    </div>
 
-<div class="mediaBox">
+    <div class="hint">照片10秒 → 视频10秒（视频不自动播放，自己点播放）</div>
+  </div>
 
-<img id="photo" style="display:none;">
-<video id="video" controls style="display:none;"></video>
+  <script>
+    /***********************
+     * 1) 你的媒体文件名
+     ***********************/
+    const photos=[
+      "IMG_20260303_133642.jpg",
+      "IMG_20260303_133710.jpg",
+      "IMG_20260303_134045.jpg",
+      "IMG_20260303_134100.jpg",
+      "IMG_20260303_134202.jpg",
+      "IMG_20260303_134223.jpg",
+      "IMG_20260303_134533.jpg",
+      "Screenshot_20260303_132729.jpg",
+      "IMG_20260303_134604_905.jpg"
+    ];
 
-</div>
+    const videos=[
+      "VID_20260302_213138_460.mp4",
+      "VID_20260302_213245_548.mp4",
+      "VID_20260302_213457_098.mp4",
+      "VID_20260302_213521_414.mp4",
+      "VID_20260302_214251_375.mp4",
+      "VID_20260302_214320_930.mp4",
+      "VID_20260302_214340_532.mp4",
+      "VID_20260302_214409_337.mp4",
+      "VID_20260302_214452_656.mp4",
+      "VID_20260302_214553_513.mp4"
+    ];
 
-</div>
+    /***********************
+     * 2) 照片10秒 -> 视频10秒 循环
+     *    视频不自动播放
+     ***********************/
+    const photoEl=document.getElementById("photo");
+    const videoEl=document.getElementById("video");
 
-<script>
+    let i=0;          // 对应第 i 组（photo i + video i）
+    let showPhoto=true;
 
-const photos=[
-"IMG_20260303_133642.jpg",
-"IMG_20260303_133710.jpg",
-"IMG_20260303_134045.jpg",
-"IMG_20260303_134100.jpg",
-"IMG_20260303_134202.jpg",
-"IMG_20260303_134223.jpg",
-"IMG_20260303_134533.jpg",
-"Screenshot_20260303_132729.jpg",
-"IMG_20260303_134604_905.jpg"
-]
+    function switchMedia(){
+      // 切换前先停视频（避免继续播放声音）
+      try{ videoEl.pause(); }catch(e){}
 
-const videos=[
-"VID_20260302_213138_460.mp4",
-"VID_20260302_213245_548.mp4",
-"VID_20260302_213457_098.mp4",
-"VID_20260302_213521_414.mp4",
-"VID_20260302_214251_375.mp4",
-"VID_20260302_214320_930.mp4",
-"VID_20260302_214340_532.mp4",
-"VID_20260302_214409_337.mp4",
-"VID_20260302_214452_656.mp4",
-"VID_20260302_214553_513.mp4"
-]
+      if(showPhoto){
+        // 显示照片
+        videoEl.style.display="none";
+        photoEl.style.display="block";
+        photoEl.src = photos[i % photos.length];
+      }else{
+        // 显示视频（不自动播放）
+        photoEl.style.display="none";
+        videoEl.style.display="block";
+        videoEl.src = videos[i % videos.length];
+        videoEl.load();
 
-const photo=document.getElementById("photo")
-const video=document.getElementById("video")
+        // 一组完成：photo->video 后才 +1
+        i++;
+      }
 
-let index=0
-let showPhoto=true
+      showPhoto = !showPhoto;
+    }
 
-function playMedia(){
+    switchMedia();
+    setInterval(switchMedia, 10000);
 
-if(showPhoto){
+    /***********************
+     * 3) 点哪里都能播放/暂停背景音乐
+     ***********************/
+    const bgm=document.getElementById("bgm");
 
-video.pause()
-video.style.display="none"
+    window.addEventListener("click", function(e){
+      // 如果点到视频控件上，不要抢点击（避免你点播放却变暂停音乐）
+      if(e.target && (e.target.tagName==="VIDEO" || e.target.closest("video"))) return;
 
-photo.src=photos[index%photos.length]
-photo.style.display="block"
+      if(!bgm) return;
 
-}else{
+      if(bgm.paused){
+        bgm.play().catch(()=>{});
+      }else{
+        bgm.pause();
+      }
+    });
 
-photo.style.display="none"
+    /***********************
+     * 4) emoji “爆炸感” 从上往下掉
+     ***********************/
+    const emojiSet=["🎉","🎂","💎","💰","✨","💖","🌸","🎈","🥳","💝","🎊"];
+    const balloon=document.getElementById("balloons");
 
-video.src=videos[index%videos.length]
-video.style.display="block"
+    function burst(){
+      // 每次爆一波，数量多一点更“炸”
+      const count=34;
 
-index++
+      for(let k=0;k<count;k++){
+        const e=document.createElement("div");
+        e.className="emoji";
+        e.textContent = emojiSet[Math.floor(Math.random()*emojiSet.length)];
 
-}
+        // 左右更分散一些
+        e.style.left = (Math.random()*100) + "%";
 
-showPhoto=!showPhoto
+        // 动画时长随机，显得更自然
+        const dur = 3.8 + Math.random()*4.8;
+        e.style.animationDuration = dur + "s";
 
-}
+        // 从更高一点开始
+        e.style.top = (-30 - Math.random()*40) + "vh";
 
-playMedia()
+        // 随机大小
+        const size = 22 + Math.random()*16;
+        e.style.fontSize = size + "px";
 
-setInterval(playMedia,10000)
+        balloon.appendChild(e);
 
-</script>
+        // 动画结束后清理
+        setTimeout(()=>{ e.remove(); }, (dur*1000)+200);
+      }
+    }
 
+    // 先来一波
+    burst();
+    // 每2.5秒再炸一次（更“爆炸感”）
+    setInterval(burst, 2500);
+  </script>
 </body>
 </html>
