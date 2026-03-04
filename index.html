@@ -17,33 +17,30 @@
 
     /* emoji 爆炸掉落层 */
     #balloons{
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      overflow:hidden;
-      z-index:0;
-    }
+position:fixed;
+inset:0;
+pointer-events:none;
+overflow:hidden;
+z-index:0;
+}
 
-    .emoji{
-      position:absolute;
-      font-size:30px;
-      animation:fall linear forwards;
-      will-change:transform,opacity;
-    }
+.emoji{
+position:absolute;
+font-size:30px;
+animation:fall linear infinite;
+}
 
-    @keyframes fall{
-      0%{
-        transform:translateY(-25vh) scale(0.6) rotate(-10deg);
-        opacity:0;
-        filter:drop-shadow(0 6px 10px rgba(0,0,0,0.08));
-      }
-      10%{ opacity:1; }
-      100%{
-        transform:translateY(115vh) scale(1.25) rotate(12deg);
-        opacity:0;
-      }
-    }
+@keyframes fall{
 
+0%{
+transform:translateY(-10vh);
+}
+
+100%{
+transform:translateY(110vh);
+}
+
+}
     /* 内容层 */
     .page{
       position:relative;
@@ -233,43 +230,31 @@
     /***********************
      * 4) emoji “爆炸感” 从上往下掉
      ***********************/
-    const emojiSet=["🎉","🎂","💎","💰","✨","💖","🌸","🎈","🥳","💝","🎊"];
-    const balloon=document.getElementById("balloons");
+  
+  function spawnEmojis(){
 
-    function burst(){
-      // 每次爆一波，数量多一点更“炸”
-      const count=34;
+const container=document.getElementById("balloons")
 
-      for(let k=0;k<count;k++){
-        const e=document.createElement("div");
-        e.className="emoji";
-        e.textContent = emojiSet[Math.floor(Math.random()*emojiSet.length)];
+const emojis=["🎉","🎂","💎","💰","✨","💖","🌸","🎈","🥳","💝","🎊"]
 
-        // 左右更分散一些
-        e.style.left = (Math.random()*100) + "%";
+for(let i=0;i<35;i++){
 
-        // 动画时长随机，显得更自然
-        const dur = 3.8 + Math.random()*4.8;
-        e.style.animationDuration = dur + "s";
+const e=document.createElement("div")
 
-        // 从更高一点开始
-        e.style.top = (-30 - Math.random()*40) + "vh";
+e.className="emoji"
 
-        // 随机大小
-        const size = 22 + Math.random()*16;
-        e.style.fontSize = size + "px";
+e.innerText=emojis[Math.floor(Math.random()*emojis.length)]
 
-        balloon.appendChild(e);
+e.style.left=Math.random()*100+"%"
 
-        // 动画结束后清理
-        setTimeout(()=>{ e.remove(); }, (dur*1000)+200);
-      }
-    }
+e.style.animationDuration=5+Math.random()*8+"s"
 
-    // 先来一波
-    burst();
-    // 每2.5秒再炸一次（更“爆炸感”）
-    setInterval(burst, 2500);
-  </script>
-</body>
-</html>
+container.appendChild(e)
+
+}
+
+}
+
+spawnEmojis()
+
+setInterval(spawnEmojis,4000)
