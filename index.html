@@ -77,15 +77,19 @@
 
   /* 底部媒体：固定在屏幕底部（但不是 position:fixed，不卡） */
   .mediaBox{
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 260px;
+
   width:90%;
   max-width:420px;
   border-radius:12px;
   overflow:hidden;
-  margin: 10px 0 16px;
   background: rgba(255,255,255,0.35);
   box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 
-  transform: translateY(-50px);
+  z-index:10;
   }
   .mediaBox img,
   .mediaBox video{
