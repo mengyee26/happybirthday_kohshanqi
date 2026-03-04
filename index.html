@@ -89,17 +89,11 @@ white-space: pre-line;
 /* 视频图片 */
 
 .mediaBox{
-position:fixed;
-left:50%;
-transform:translateX(-50%);
-bottom:20px;
-
 width:90%;
 max-width:420px;
 border-radius:12px;
 overflow:hidden;
-
-z-index:5;
+margin-top:20px;
 }
 
 <!-- emoji容器 -->
@@ -247,7 +241,7 @@ const container=document.getElementById("balloons")
 
 const emojis=["🎉","🎂","💎","💰","✨","💖","🌸","🎈","🥳","💝","🎊","🪄","🎀","💌","💵"]
 
-for(let i=0;i<35;i++){
+for(let i=0;i<15;i++)
 
 const e=document.createElement("div")
 
@@ -261,15 +255,12 @@ e.style.animationDuration=3+Math.random()*4+"s"
 
 container.appendChild(e)
 
-setTimeout(()=>{e.remove()},13000)
-
-}
-
+setTimeout(()=>{e.remove()},12000)
 }
 
 spawnEmojis()
 
-setInterval(spawnEmojis,4000)
+setInterval(spawnEmojis,6000)
 
 </script>
 
