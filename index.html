@@ -7,9 +7,15 @@
 
 <style>
   body{
-margin:0;
-font-family:"Noto Sans SC",sans-serif;
-background:linear-gradient(to bottom,#f6d9e1,#f4cfd9);
+    margin:0;
+    font-family:"Noto Sans SC",sans-serif;
+    background:linear-gradient(to bottom,#f6d9e1,#f4cfd9);
+    color:#111;
+  }
+
+  html, body{
+    min-height:150vh;
+    overflow-y:auto;
   }
 
   /* emoji 层 */
@@ -74,11 +80,13 @@ padding-bottom:200px;
 
   /* 底部媒体：固定在屏幕底部（但不是 position:fixed，不卡） */
   .mediaBox{
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 260px;
+    position: fixed;
+    left:50%;
+    transform:translateX(-50%);
+    bottom:260px;
+  }
 
+</style>
   width:90%;
   max-width:420px;
   border-radius:12px;
@@ -97,9 +105,13 @@ padding-bottom:200px;
     background:#0000;
   }
   .mediaBox video{ background:#000; }
-</style>
-</head>
 
+  html, body{
+    min-height:120vh;
+    overflow-y:auto;
+  }
+
+</style>
 <body>
   <div id="balloons"></div>
 
