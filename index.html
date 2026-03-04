@@ -19,8 +19,19 @@ body{
   inset:0;
   pointer-events:none;
   z-index:0;
-  overflow:hidden;   /* ✅ 防止 emoji 撑出屏幕导致页面变长 */
 }
+
+/* 烟花层 */
+#fireworks{
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+</style>
 
 .emoji{
   position:absolute;
@@ -208,6 +219,8 @@ window.addEventListener("click",function(){
 
 })();
 </script>
+
+<canvas id="fireworks"></canvas>
 
 </body>
 </html>
