@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>生日快乐</title>
 
-  <style>
-    body{
-      background:linear-gradient(to bottom,#f6d9e1,#f4cfd9);
-      margin:0;
-      font-family:"Noto Sans SC",sans-serif;
-      overflow-x:hidden;
-      min-height:100vh;
-      color:#111;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>生日快乐</title>
 
-    /* emoji 爆炸掉落层 */
-    #balloons{
+<style>
+
+body{
+background:linear-gradient(to bottom,#f6d9e1,#f4cfd9);
+margin:0;
+font-family:"Noto Sans SC",sans-serif;
+overflow-x:hidden;
+min-height:100vh;
+}
+
+/* emoji背景 */
+
+#balloons{
 position:fixed;
 inset:0;
 pointer-events:none;
@@ -41,201 +43,195 @@ transform:translateY(110vh);
 }
 
 }
-    /* 内容层 */
-    .page{
-      position:relative;
-      z-index:1;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      padding: 8px 0 40px;
-    }
 
-    h1{
-      font-size:30px;
-      margin-top:10px;
-      margin-bottom:5px;
-      text-align:center;
-    }
+/* 页面 */
 
-    .subtitle{
-      font-size:18px;
-      margin-bottom:20px;
-      text-align:center;
-    }
+.page{
+display:flex;
+flex-direction:column;
+align-items:center;
+position:relative;
+z-index:1;
+}
 
-    /* 文字：整体居中，但内容左对齐（你要的“居中往左靠”） */
-    .textArea{
-      width:90%;
-      max-width:420px;
-      margin:0 auto 20px auto;
-      text-align:left;
-      line-height:1.8;
-      font-size:17px;
-      white-space:pre-wrap;
-    }
+/* 标题 */
 
-    /* 只显示一个媒体框：不会把网页变长 */
-    .mediaBox{
-      width:90%;
-      max-width:420px;
-      border-radius:12px;
-      overflow:hidden;
-      background: rgba(255,255,255,0.35);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-    }
+h1{
+font-size:30px;
+margin-top:10px;
+margin-bottom:5px;
+text-align:center;
+}
 
-    .mediaBox img,
-    .mediaBox video{
-      width:100%;
-      height:auto;
-      display:block;
-      object-fit:contain; /* 原装比例不裁切 */
-      background:#0000;
-    }
+/* 副标题 */
 
-    .mediaBox video{
-      background:#000;
-    }
+.subtitle{
+font-size:18px;
+margin-bottom:20px;
+text-align:center;
+}
 
-    .hint{
-      width:90%;
-      max-width:420px;
-      margin-top:10px;
-      font-size:12px;
-      opacity:0.7;
-      text-align:center;
-    }
-  </style>
+/* 文字 */
+
+.textArea{
+width:90%;
+max-width:420px;
+margin:0 auto 20px auto;
+text-align:left;
+line-height:1.8;
+font-size:17px;
+}
+
+/* 视频图片 */
+
+.mediaBox{
+width:90%;
+max-width:420px;
+border-radius:12px;
+overflow:hidden;
+}
+
+.mediaBox img,
+.mediaBox video{
+width:100%;
+height:auto;
+display:block;
+}
+
+</style>
+
 </head>
 
 <body>
 
-  <!-- 背景 emoji -->
-  <div id="balloons"></div>
+<!-- emoji容器 -->
+<div id="balloons"></div>
 
-  <!-- 背景音乐：点哪里都能播放/暂停 -->
-  <audio id="bgm" loop>
-    <source src="生日快乐.mp3" type="audio/mpeg" />
-  </audio>
+<!-- 音乐 -->
+<audio id="bgm" loop>
+<source src="生日快乐.mp3" type="audio/mpeg">
+</audio>
 
-  <div class="page">
-    <h1>🎉 生日快乐 🎉</h1>
-    <div class="subtitle">生日快乐，我的债主😂</div>
+<div class="page">
 
-    <div class="textArea">
-谢谢你每一次都在我身边，陪我疯过，哭过，笑过。
-不知道是不是我太久没回来了，上一次我回来，我们聊了很多。
-我好像很久没有那样笑过了，我知道你的良苦用心，谢谢你💖
+<h1>🎉 生日快乐 🎉</h1>
 
-我想你应该好奇我怎么会做网站吧？其实，功劳要谢谢你，
-是你开始教会我很多，我不会做图你教我CANVA，
-我不会的你都在教我都在学。现在想想，好像好多因为你我才会😂。
+<div class="subtitle">生日快乐，我的债主😂</div>
+
+<div class="textArea">
+
+谢谢你每一次都在我身边，陪我疯过，哭过，笑过。  
+不知道是不是我太久没回来了，上一次我回来，我们聊了很多。  
+我好像很久没有那样笑过了，我知道你的良苦用心，谢谢你💖  
+
+我想你应该好奇我怎么会做网站吧？其实，功劳要谢谢你，  
+是你开始教会我很多，我不会做图你教我CANVA，  
+我不会的你都在教我都在学。现在想想，好像好多因为你我才会😂。  
 
 不多说啦～很多话在心中🤣🤣，你我明白就好。
-    </div>
 
-    <!-- 轮播：只显示一张（照片/视频） -->
-    <div class="mediaBox">
-      <img id="photo" alt="photo" style="display:none;">
-      <video id="video" controls playsinline preload="metadata" style="display:none;"></video>
-    </div>
+</div>
 
-    <div class="hint">（点击播放，再点击暂停）</div>
-  </div>
+<div class="mediaBox">
 
-  <script>
-    /***********************
-     * 1) 你的媒体文件名
-     ***********************/
-    const photos=[
-      "IMG_20260303_133642.jpg",
-      "IMG_20260303_133710.jpg",
-      "IMG_20260303_134045.jpg",
-      "IMG_20260303_134100.jpg",
-      "IMG_20260303_134202.jpg",
-      "IMG_20260303_134223.jpg",
-      "IMG_20260303_134533.jpg",
-      "Screenshot_20260303_132729.jpg",
-      "IMG_20260303_134604_905.jpg"
-    ];
+<img id="photo" style="display:none;">
+<video id="video" controls style="display:none;"></video>
 
-    const videos=[
-      "VID_20260302_213138_460.mp4",
-      "VID_20260302_213245_548.mp4",
-      "VID_20260302_213457_098.mp4",
-      "VID_20260302_213521_414.mp4",
-      "VID_20260302_214251_375.mp4",
-      "VID_20260302_214320_930.mp4",
-      "VID_20260302_214340_532.mp4",
-      "VID_20260302_214409_337.mp4",
-      "VID_20260302_214452_656.mp4",
-      "VID_20260302_214553_513.mp4"
-    ];
+</div>
 
-    /***********************
-     * 2) 照片10秒 -> 视频10秒 循环
-     *    视频不自动播放
-     ***********************/
-    const photoEl=document.getElementById("photo");
-    const videoEl=document.getElementById("video");
+</div>
 
-    let i=0;          // 对应第 i 组（photo i + video i）
-    let showPhoto=true;
+<script>
 
-    function switchMedia(){
-      // 切换前先停视频（避免继续播放声音）
-      try{ videoEl.pause(); }catch(e){}
+/* 照片 */
 
-      if(showPhoto){
-        // 显示照片
-        videoEl.style.display="none";
-        photoEl.style.display="block";
-        photoEl.src = photos[i % photos.length];
-      }else{
-        // 显示视频（不自动播放）
-        photoEl.style.display="none";
-        videoEl.style.display="block";
-        videoEl.src = videos[i % videos.length];
-        videoEl.load();
+const photos=[
+"IMG_20260303_133642.jpg",
+"IMG_20260303_133710.jpg",
+"IMG_20260303_134045.jpg",
+"IMG_20260303_134100.jpg",
+"IMG_20260303_134202.jpg",
+"IMG_20260303_134223.jpg",
+"IMG_20260303_134533.jpg",
+"Screenshot_20260303_132729.jpg",
+"IMG_20260303_134604_905.jpg"
+]
 
-        // 一组完成：photo->video 后才 +1
-        i++;
-      }
+/* 视频 */
 
-      showPhoto = !showPhoto;
-    }
+const videos=[
+"VID_20260302_213138_460.mp4",
+"VID_20260302_213245_548.mp4",
+"VID_20260302_213457_098.mp4",
+"VID_20260302_213521_414.mp4",
+"VID_20260302_214251_375.mp4",
+"VID_20260302_214320_930.mp4",
+"VID_20260302_214340_532.mp4",
+"VID_20260302_214409_337.mp4",
+"VID_20260302_214452_656.mp4",
+"VID_20260302_214553_513.mp4"
+]
 
-    switchMedia();
-    setInterval(switchMedia, 10000);
+const photo=document.getElementById("photo")
+const video=document.getElementById("video")
 
-    /***********************
-     * 3) 点哪里都能播放/暂停背景音乐
-     ***********************/
-    const bgm=document.getElementById("bgm");
+let index=0
+let showPhoto=true
 
-    window.addEventListener("click", function(e){
-      // 如果点到视频控件上，不要抢点击（避免你点播放却变暂停音乐）
-      if(e.target && (e.target.tagName==="VIDEO" || e.target.closest("video"))) return;
+function changeMedia(){
 
-      if(!bgm) return;
+if(showPhoto){
 
-      if(bgm.paused){
-        bgm.play().catch(()=>{});
-      }else{
-        bgm.pause();
-      }
-    });
+video.pause()
+video.style.display="none"
 
-    /***********************
-     * 4) emoji “爆炸感” 从上往下掉
-     ***********************/
-  
-  function spawnEmojis(){
+photo.src=photos[index%photos.length]
+photo.style.display="block"
+
+}else{
+
+photo.style.display="none"
+
+video.src=videos[index%videos.length]
+video.style.display="block"
+
+index++
+
+}
+
+showPhoto=!showPhoto
+
+}
+
+changeMedia()
+
+setInterval(changeMedia,10000)
+
+/* 点击播放暂停音乐 */
+
+const music=document.getElementById("bgm")
+
+window.addEventListener("click",function(){
+
+if(music.paused){
+
+music.play().catch(()=>{})
+
+}else{
+
+music.pause()
+
+}
+
+})
+
+/* emoji */
+
+function spawnEmojis(){
 
 const container=document.getElementById("balloons")
 
-const emojis=["🎉","🎂","💎","💰","✨","💖","🌸","🎈","🥳","💝","🎊"]
+const emojis=["🎉","🎂","💎","💰","✨","💖","🌸","🎈","🥳","💝","🎊","🪄","🎀","💌","💵"]
 
 for(let i=0;i<35;i++){
 
@@ -251,6 +247,8 @@ e.style.animationDuration=5+Math.random()*8+"s"
 
 container.appendChild(e)
 
+setTimeout(()=>{e.remove()},13000)
+
 }
 
 }
@@ -258,3 +256,8 @@ container.appendChild(e)
 spawnEmojis()
 
 setInterval(spawnEmojis,4000)
+
+</script>
+
+</body>
+</html>
