@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>生日快乐</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生日快乐</title>
 
 <style>
 body{
@@ -19,19 +19,8 @@ body{
   inset:0;
   pointer-events:none;
   z-index:0;
+  overflow:hidden;
 }
-
-/* 烟花层 */
-#fireworks{
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 9999;
-}
-
-</style>
 
 .emoji{
   position:absolute;
@@ -47,13 +36,23 @@ body{
 
 /* 页面内容层 */
 .page{
-  min-height:100vh;
   display:flex;
   flex-direction:column;
   align-items:center;
   position:relative;
   z-index:1;
 }
+
+/* 烟花层（canvas） */
+#fireworks{
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+}
+</style>
 
 .textArea{
   width:90%;
