@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>生日快乐</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>生日快乐</title>
 
 <style>
+
 body{
   background: linear-gradient(to bottom, #ff7eb9, #ffd6e8);
   margin:0;
-  font-family: "Noto Sans SC", sans-serif;
+  font-family:"Noto Sans SC",sans-serif;
   overflow-x:hidden;
+  min-height:100vh;
 }
 
-/* 背景 emoji 层 */
+/* emoji背景 */
 #balloons{
   position:fixed;
   inset:0;
@@ -24,17 +27,17 @@ body{
 
 .emoji{
   position:absolute;
-  font-size:32px;
-  animation: fall linear infinite;
+  font-size:30px;
+  animation:fall linear infinite;
   opacity:0.9;
 }
 
 @keyframes fall{
-  0%{ transform: translateY(-15vh); }
-  100%{ transform: translateY(115vh); }
+  0%{transform:translateY(-15vh);}
+  100%{transform:translateY(115vh);}
 }
 
-/* 页面内容层 */
+/* 页面 */
 .page{
   display:flex;
   flex-direction:column;
@@ -43,63 +46,39 @@ body{
   z-index:1;
 }
 
-/* 烟花层（canvas） */
-#fireworks{
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 9999;
-}
-</style>
-
-.textArea{
-  width:90%;
-  margin:40px auto;
-  text-align:left;
-  line-height:1.8;
-  font-size:18px;
-
-  background:none;
-  box-shadow:none;
-  border:none;
-}
-
+/* 标题 */
 h1{
   font-size:35px;
-  margin-top:-50px;
+  margin-top:50px;
   margin-bottom:15px;
   text-align:center;
 }
 
-#message{
-  white-space:pre-wrap;
-  line-height:1.9;
-  font-size:25px;
-  margin-top:35px;
+/* 文字区域 */
+.textArea{
+  width:90%;
+  max-width:420px;
+  margin:40px auto;
+  text-align:left;
+  line-height:1.8;
+  font-size:18px;
 }
 
-/* 媒体固定在底部 */
-.mediaArea{
-  width:120%;
-  max-width:650px;
-  position:absolute;
-  bottom:90px;
-  left:50%;
-  transform:translateX(-50%);
+/* 轮播 */
+.carousel{
+  width:90%;
+  max-width:420px;
+  margin-bottom:80px;
 }
 
-.carousel-item{
-  display:none;
-}
-
-.carousel-item img,
-.carousel-item video{
+/* 图片视频 */
+.carousel img,
+.carousel video{
   width:100%;
   height:auto;
   display:block;
 }
+
 </style>
 </head>
 
@@ -107,119 +86,59 @@ h1{
 
 <div id="balloons"></div>
 
-<audio id="bgm" loop>
-  <source src="生日快乐.mp3" type="audio/mpeg">
-</audio>
-
 <div class="page">
 
-  <div class="textArea">
-    <h1>🎉 生日快乐 🎉</h1>
-    <div id="message"></div>
-  </div>
+<h1>🎉 生日快乐 🎉</h1>
 
-  <div class="mediaArea">
-    <div class="carousel-item"><img src="IMG_20260303_133642.jpg"></div>
-    <div class="carousel-item"><video src="VID_20260302_213138_460.mp4" controls playsinline></video></div>
+<div class="textArea">
+生日快乐，我的猪宝宝。谢谢你每一次都在我身边，陪我疯过，哭过，笑过。  
+不知道是不是我太久没回来了，上一次我回来，我们聊了很多。  
+我好像很久没有那样笑过了，我知道你的一点一滴，你做的每件事，我都很感动。  
+希望以后会做得更好，其实，功劳要谢谢你，是你开始教会我很多。  
+我不会做回你教我CANVA，我不会的你都在教我都在帮我。  
 
-    <div class="carousel-item"><img src="IMG_20260303_133710.jpg"></div>
-    <div class="carousel-item"><video src="VID_20260302_213245_548.mp4" controls playsinline></video></div>
+现在想想，好像好多因为你才会。  
+不多说啦～很多话在心中 ❤️
+</div>
 
-    <div class="carousel-item"><img src="IMG_20260303_134045.jpg"></div>
-    <div class="carousel-item"><video src="VID_20260302_213457_098.mp4" controls playsinline></video></div>
+<div class="carousel">
 
-    <div class="carousel-item"><img src="IMG_20260303_134100.jpg"></div>
-    <div class="carousel-item"><video src="VID_20260302_213521_414.mp4" controls playsinline></video></div>
+<video controls>
+<source src="video1.mp4" type="video/mp4">
+</video>
 
-    <div class="carousel-item"><img src="IMG_20260303_134202.jpg"></div>
-    <div class="carousel-item"><video src="VID_20260302_214251_375.mp4" controls playsinline></video></div>
-
-    <div class="carousel-item"><img src="IMG_20260303_134223.jpg"></div>
-    <div class="carousel-item"><video src="VID_20260302_214320_930.mp4" controls playsinline></video></div>
-
-    <div class="carousel-item"><img src="IMG_20260303_134533.jpg"></div>
-    <div class="carousel-item"><video src="VID_20260302_214340_532.mp4" controls playsinline></video></div>
-
-    <div class="carousel-item"><img src="Screenshot_20260303_132729.jpg"></div>
-    <div class="carousel-item"><video src="VID_20260302_214409_337.mp4" controls playsinline></video></div>
-
-    <div class="carousel-item"><img src="IMG_20260303_134604_905.jpg"></div>
-    <div class="carousel-item"><video src="VID_20260302_214452_656.mp4" controls playsinline></video></div>
-
-    <div class="carousel-item"><video src="VID_20260302_214553_513.mp4" controls playsinline></video></div>
-  </div>
+</div>
 
 </div>
 
 <script>
-(function(){
 
-const text = `生日快乐，我的债主😂
-
-谢谢你每一次都在我身边，陪我疯过，哭过，笑过。不知道是不是我太久没回来了，上一轮我回来，我们聊了很多，我好像很久没有那样笑过了。我知道你的良苦用心，谢谢你。
-
-我想你应该好奇我怎么会做网站吧？其实，功劳要谢谢你，是你开始教会我很多，我不会做图你教我CANVA,我不会的你都在教我都在学。现在想想，好像好多因为你我才会😂。
-
-不多说啦～很多话在心中🤣🤣，你我明白就好。`;
-
-function typeWriter(speed){
-  const el=document.getElementById("message");
-  let i=0;
-  function typing(){
-    if(i<text.length){
-      el.innerHTML+=text.charAt(i);
-      i++;
-      setTimeout(typing,speed);
-    }
-  }
-  typing();
-}
-
-function startCarousel(interval){
-  const slides=document.getElementsByClassName("carousel-item");
-  let index=0;
-  function show(){
-    for(let s of slides){ s.style.display="none"; }
-    slides[index].style.display="block";
-    index=(index+1)%slides.length;
-    setTimeout(show,interval);
-  }
-  show();
-}
-
+/* emoji掉落 */
 function spawnEmojis(){
-  const layer=document.getElementById("balloons");
-  const emojis=["✨","🎉","🎈","💖","🎂","🥳","🌸","💝","🌟","💰","💵","💎","🪄","🎀","💌"];
-  for(let j=0;j<60;j++){
-    const e=document.createElement("div");
-    e.className="emoji";
-    e.innerText=emojis[Math.floor(Math.random()*emojis.length)];
-    e.style.left=Math.random()*100+"%";
-    e.style.animationDuration=(3+Math.random()*3)+"s";
-    e.style.animationDelay=(-Math.random()*5)+"s";
-    layer.appendChild(e);
-  }
+
+const container=document.getElementById("balloons")
+
+const emojis=["🎉","🎂","💎","💰","✨","💖","🌸"]
+
+for(let i=0;i<25;i++){
+
+const e=document.createElement("div")
+
+e.className="emoji"
+e.innerText=emojis[Math.floor(Math.random()*emojis.length)]
+
+e.style.left=Math.random()*100+"%"
+e.style.animationDuration=5+Math.random()*10+"s"
+
+container.appendChild(e)
+
 }
 
-window.addEventListener("load",function(){
-  typeWriter(60);
-  startCarousel(10000);
-  spawnEmojis();
-});
+}
 
-window.addEventListener("click",function(){
-  const music=document.getElementById("bgm");
-  if(music.paused){
-    music.play().catch(()=>{});
-  }else{
-    music.pause();
-  }
-});
+spawnEmojis()
 
-})();
 </script>
-
-<canvas id="fireworks"></canvas>
 
 </body>
 </html>
