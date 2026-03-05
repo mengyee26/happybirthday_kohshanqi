@@ -81,11 +81,12 @@ padding-bottom:200px;
   transform:translateX(-50%);
   bottom:80px;
 
-  width:min(90vw, 420px);
-  max-height:220px;
+  height:220px;          /* ✅ 永远就这么高，不会突然变大 */
+  aspect-ratio: 9 / 16;  /* ✅ 永远竖屏比例 */
+  width:auto;
+  max-width:90vw;        /* ✅ 防止太宽超出手机 */
 
   z-index:10;
-
   background:transparent;
   box-shadow:none;
   border-radius:0;
@@ -95,10 +96,10 @@ padding-bottom:200px;
 .mediaBox img,
 .mediaBox video{
   width:100%;
-  height:auto;
-  max-height:220px;
+  height:100%;
   display:block;
-  object-fit:contain;
+  object-fit:contain;    /* ✅ 不裁切，不变形 */
+  background:transparent;
 }
 
 html, body{
