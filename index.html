@@ -38,6 +38,9 @@ flex-direction:column;
 align-items:center;
 position:relative;
 z-index:1;
+ width:min(92vw,420px);   /* 👈 控制文字宽度 */
+margin:0 auto; /* 居中 */
+    
 padding-bottom:320px;
 }
 
@@ -82,7 +85,7 @@ padding-bottom:320px;
   transform:translateX(-50%);
   bottom:40px;
 
-  height:1000px;          /* 想大改260，想小改220 */
+  height:700px;          /* 想大改260，想小改220 */
   aspect-ratio: 9 / 16;  /* ✅ 竖屏盒子，绝对不会被压成横 */
   max-width:92vw;
 
