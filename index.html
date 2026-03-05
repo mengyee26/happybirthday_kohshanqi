@@ -52,29 +52,26 @@ padding-bottom:320px;
   }
 
   .subtitle{
-    width:90%;
-    max-width:420px;
-    margin:20px auto 30px auto;  /* 标题下空一行 + 副标题下空一行 */
-    text-align:left;             /* 副标题往左靠 */
-    font-size:25px;              /* 你要变大就改这里 */
-    font-weight:700;
-  }
+  width:min(92vw,600px);
+  margin:20px auto 30px auto;
+  text-align:left;     /* 标题/副标题居中 */
+  font-size:25px;
+  font-weight:700;
+}
 
-  /* 内容区：可滚动，不会推着底部媒体跑 */
-  .content{
-    width:90%;
-    max-width:420px;
-    flex:1;
-    overflow:auto;            /* 关键：文字在这里滚动 */
-    padding-bottom:14px;
-  }
+.content{
+  width:min(92vw,600px);
+  flex:1;
+  overflow:auto;
+  padding-bottom:14px;
+}
 
-  .textArea{
-    text-align:left;
-    line-height:1.8;
-    font-size:25px;
-    white-space:pre-line;     /* 保留换行 */
-  }
+.textArea{
+  text-align:left;       /* ✅ 正文左对齐更自然 */
+  line-height:1.8;
+  font-size:25px;
+  white-space:pre-line;
+}
 
   /* 底部媒体：固定在屏幕底部（但不是 position:fixed，不卡） */
   /* 底部媒体 */
