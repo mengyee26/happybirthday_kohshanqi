@@ -79,38 +79,36 @@ padding-bottom:200px;
   }
 
   /* 底部媒体：固定在屏幕底部（但不是 position:fixed，不卡） */
+ <style>
   .mediaBox{
-    position: fixed;
-    left:50%;
-    transform:translateX(-50%);
-    bottom:260px;
-  }
+  position: fixed;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:260px;
 
-</style>
   width:90%;
   max-width:420px;
   border-radius:12px;
   overflow:hidden;
   background: rgba(255,255,255,0.35);
   box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-
   z-index:10;
-  }
-  .mediaBox img,
-  .mediaBox video{
-    width:100%;
-    height:auto;
-    display:block;
-    object-fit:contain;
-    background:#0000;
-  }
-  .mediaBox video{ background:#000; }
+}
 
-  html, body{
-    min-height:120vh;
-    overflow-y:auto;
-  }
+.mediaBox img,
+.mediaBox video{
+  width:100%;
+  max-height:320px;   /* 控制照片视频大小 */
+  height:auto;
+  display:block;
+  object-fit:contain;
+  background:#0000;
+}
 
+html, body{
+  min-height:120vh;
+  overflow-y:auto;
+}
 </style>
 <body>
   <div id="balloons"></div>
