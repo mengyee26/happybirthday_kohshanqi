@@ -38,8 +38,8 @@ flex-direction:column;
 align-items:center;
 position:relative;
 z-index:1;
-padding-bottom:200px;
-  }
+padding-bottom:300px;
+}
 
   /* 顶部区 */
   h1{
@@ -77,29 +77,28 @@ padding-bottom:200px;
   /* 底部媒体 */
 .mediaBox{
   position: fixed;
-  left:50%;
-  transform:translateX(-50%);
-  bottom:80px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 40px;
 
-  height:220px;          /* ✅ 永远就这么高，不会突然变大 */
-  aspect-ratio: 9 / 16;  /* ✅ 永远竖屏比例 */
-  width:auto;
-  max-width:90vw;        /* ✅ 防止太宽超出手机 */
+  width: min(92vw, 420px);
+  height: 240px;              /* ✅ 固定高度，不会忽大忽小 */
+  z-index: 10;
 
-  z-index:10;
-  background:transparent;
-  box-shadow:none;
-  border-radius:0;
-  overflow:hidden;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 14px;        /* 你不想圆角就改 0 */
+  overflow: hidden;           /* ✅ 配合 cover 才能干净 */
 }
 
+/* ✅ 关键：没有左右框 */
 .mediaBox img,
 .mediaBox video{
-  width:100%;
-  height:100%;
-  display:block;
-  object-fit:contain;    /* ✅ 不裁切，不变形 */
-  background:transparent;
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  object-fit: cover;          /* ✅ 填满，不会左右黑边/空边 */
+  background: transparent;
 }
 
 html, body{
