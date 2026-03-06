@@ -109,26 +109,27 @@ html, body{
   <div id="balloons"></div>
 
   <!-- 音乐 -->
-  <audio id="bgm" loop>
-    <source src="生日快乐.mp3" type="audio/mpeg">
-  </audio>
+<audio id="bgm" loop>
+  <source src="生日快乐.mp3" type="audio/mpeg">
+</audio>
 
-  <div class="page">
-    <h1>🎉 生日快乐 🎉</h1>
+<div class="page">
+  <h1>🎉 生日快乐 🎉</h1>
 
-    <div class="subtitle">生日快乐，我的债主😂</div>
+  <div class="subtitle">生日快乐，我的债主😂</div>
 
-    <!-- 文字滚动区（不会推底部媒体） -->
-    <div class="content">
-      <div class="textArea" id="message"></div>
-    </div>
+  <!-- 文字滚动区 -->
+  <div class="content">
+    <div class="textArea" id="message"></div>
+  </div>
 
-    <!-- 底部媒体固定区 -->
-    <div class="mediaBox">
+</div>   <!-- 这里结束 page -->
+
+<!-- 媒体盒子要放在 page 外面 -->
+<div class="mediaBox">
   <img id="photo" src="" alt="" style="display:none;">
   <video id="video" src="" controls playsinline preload="metadata" style="display:none;"></video>
 </div>
-  </div>
 
 <script>
 /* ===== 打字机 ===== */
