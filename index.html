@@ -80,17 +80,15 @@ padding-bottom:320px;
   position: fixed;
   left:50%;
   transform:translateX(-50%);
-  bottom:40px;
+  bottom:20px;
 
-  height:.320px;          /* 想大改260，想小改220 */
-  aspect-ratio: 9 / 16;  /* ✅ 竖屏盒子，绝对不会被压成横 */
-  max-width:92vw;
+  width:min(88vw, 320px);   /* 不会太大 */
+  aspect-ratio:9 / 16;      /* 永远直版 */
 
   z-index:10;
 
   background:transparent;
-  box-shadow:none;
-  border-radius:14px;    /* 不想圆角就改0 */
+  border-radius:0;
   overflow:hidden;
 }
 
@@ -99,10 +97,8 @@ padding-bottom:320px;
   width:100%;
   height:100%;
   display:block;
-  object-fit:cover;      /* ✅ 填满，不会左右空框（会轻微裁边） */
-  background:transparent;
+  object-fit:cover;   /* 填满，不会左右空框 */
 }
-
 html, body{
   min-height:100vh;
   overflow-y:auto;
